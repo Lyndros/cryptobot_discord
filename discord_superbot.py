@@ -3,7 +3,6 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 import discord
-import asyncio
 import requests
 import coinmarketcap
 import json
@@ -92,16 +91,18 @@ def mostrar_precio():
 
 def mostrar_balance():
     #Variable para calcular el balance total
-    Total_Balance = 0
+    Total_Balance = 0.0
 
     #Construimos la dichosa tablita
     Tabla = PrettyTable()
     Tabla.field_names = ["MN", "Balance"]
+
     #Get balance for all nodes
     for mn in sorted(dict.keys(MASTERNODE_LIST)):
         MN_Current_Coins = get_balance(MASTERNODE_LIST[mn][2])
         Total_Balance += MN_Current_Coins
         Tabla.add_row([mn, MN_Current_Coins])
+
     #Get balance for other addresses
     for oaddr in sorted(dict.keys(OTHER_ADDRESS_LIST)):
         OADDR_Current_Coins = get_balance(OTHER_ADDRESS_LIST[oaddr])
@@ -112,7 +113,7 @@ def mostrar_balance():
     message = '\n' + \
     '+Balance ' + COIN_ACRONYM +'\n' + \
     Tabla.get_string() + '\n'  \
-    '- Total:       '+str(round(Total_Balance,DECIMALS))+" "+COIN_ACRONYM
+    '-Total:  '+str(round(Total_Balance,DECIMALS))
 
     return message
 
@@ -121,9 +122,14 @@ def mostrar_rendimiento():
     market = coinmarketcap.Market()
     coin = market.ticker(COIN_NAME, convert="EUR")
 
+    #Para calcular el total
+    Total_EUR_Day   = 0.0
+    Total_Coins_Day = 0.0
+
     #Construimos la dichosa tablita
     Tabla = PrettyTable()
-    Tabla.field_names = ["MN", "Balance", "TOK/Dia", "EUR/Dia"]
+    Tabla.field_names = ["MN", COIN_ACRONYM+"/Dia", "EUR/Dia"]
+
     #Get balance for all nodes
     for mn in sorted(dict.keys(MASTERNODE_LIST)):
         MN_Init_Date = MASTERNODE_LIST[mn][0]
@@ -132,12 +138,16 @@ def mostrar_rendimiento():
         MN_Running_Days  = get_running_days(MN_Init_Date)
         MN_Coins_Day     = round((MN_Current_Coins-MN_Initial_Coins)/MN_Running_Days,DECIMALS)
         MN_EUR_Day       = round(MN_Coins_Day*float(coin[0]['price_eur']),DECIMALS)
-        Tabla.add_row([mn, MN_Current_Coins, MN_Coins_Day, MN_EUR_Day])
+        Tabla.add_row([mn, MN_Coins_Day, MN_EUR_Day])
+        #Total Computation
+        Total_EUR_Day    += MN_EUR_Day
+        Total_Coins_Day  += MN_Coins_Day
 
     #Ponemos todo en el mensajito de vuelta
     message = "\n" + \
     "+Rendimiento MNs\n" + \
-    Tabla.get_string()
+    Tabla.get_string()+ '\n'  \
+    '-Total:  '+str(round(Total_Coins_Day,DECIMALS))+"  "+str(round(Total_EUR_Day,2))
 
     return message
 
