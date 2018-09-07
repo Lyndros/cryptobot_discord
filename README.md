@@ -1,7 +1,7 @@
 <html>
 <body style="font-family: Consolas, monospace; font-size:14pt;">
 <br/> <b>Discord BOT Installation instructions</b>
-<br/> ─────────────────────────────────────
+<br/> ─────────────────────────────────────────────────────────────────────────────────
 <br/>
 <br/> A beautiful discord bot that allows you to track your favourite masternodes balances and performances.
 <br/>
@@ -23,7 +23,7 @@
 <br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/crypto_tools/master/discord_bots/config_smartcash.yml
 <br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/crypto_tools/master/discord_bots/config_tokugawa.yml
 <br/>
-<br/> <b>2. Customizing confiuration file</b>
+<br/> <b>2. Setting your configuration file</b>
 <br/> 
 <br/> Edit the configuration file and modify as needed; coin parameters, masternodes addresses, etc...
 <br/> If the coin explorer base url is not known by you contact the coin developer.
@@ -44,6 +44,6 @@
 <br/> &nbsp; &nbsp;> <b>ethereum address:</b> <i>0x44F102616C8e19fF3FED10c0b05B3d23595211ce</i>
 <br/> &nbsp; &nbsp;> <b>tokugawa address:</b> <i>TjrQBaaCPoVW9mPAZHPfVx9JJCq7yZ7QnA</i>
 <br/>
-<br/> For any questions feel free to contact me at lyndros@hotmail.com
+<br/> For any questions feel free to contact me at <i>lyndros@hotmail.com</i>
 </body>
 </html>
