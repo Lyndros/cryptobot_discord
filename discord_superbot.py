@@ -6,6 +6,8 @@ import discord
 import requests
 import coinmarketcap
 import json
+import yaml
+import argparse
 
 from urllib.request         import urlopen
 from discord.ext.commands   import Bot
@@ -13,31 +15,15 @@ from discord.ext            import commands
 from datetime               import datetime
 from prettytable            import PrettyTable
 
-################################################################################
-#                          CONFIGURATION PARAMETERS                            #
-################################################################################
-#COIN ACRONYM SUCH AS: BTC/TOK/EOS...
-COIN_NAME       = "Tokugawa"
-COIN_ACRONYM    = "TOK"
-#URL TO EXPLORER COIN API EXAMPLE FOR TOKUGAWA, PLEASE MODIFY
-COIN_EXPLORER_BASE_URL="http://explorer.tokugawacoin.com/ext/getaddress/"
-#MASTERNODE: SETUP DATE, INITIAL COINS, ADDRESS
-MASTERNODE_LIST = {
-    "MN01": ("09/07/2018", 2500, "YOUR_ADDRESS"),
-    "MN02": ("09/07/2018", 2500, "YOUR_ADDRESS"),
-    "MN03": ("09/07/2018", 2500, "YOUR_ADDRESS"),
-    "MN04": ("09/07/2018", 2500, "YOUR_ADDRESS")
-}
+#Add the configuration file to our python program
+parser = argparse.ArgumentParser()
+parser.add_argument("config_file", help="The configuration file to be loaded.")
+args = parser.parse_args()
 
-#THESE ARE OTHER ADDRESSES SHOWN IN BALANCE BUT NOT MASTERNODES
-OTHER_ADDRESS_LIST = {
-    "PERS": "YOUR_ADDRESS"
-}
-#PRECISION IN DECIMALS TO BE SHOWN
-DECIMALS=6
-#DISCORD API KEY TO RUN MY BOT
-DISCORD_API_KEY="YOUR_DISCORD_API_KEY"
-################################################################################
+#Parse the configuration file
+with open(args.config_file, 'r') as ymlfile:
+    cfg = yaml.load(ymlfile)
+
 Client = discord.Client()
 client = commands.Bot(command_prefix = "!")
 
@@ -58,12 +44,12 @@ def get_running_days(date_epoch):
     return delta.days
 
 def get_balance(address):
-    url = COIN_EXPLORER_BASE_URL + address
+    url = cfg['COIN']['explorer_url'] + address
     req = requests.get(url)
     status_code = req.status_code
     if status_code == 200:
         #Limit to 6 decimals
-        return round(float(json.loads(req.text)['balance']),DECIMALS)
+        return round(float(json.loads(req.text)['balance']),cfg['COIN']['decimals'])
     else:
         return None
 
@@ -77,8 +63,8 @@ def mostrar_ayuda():
 def mostrar_precio():
     Now = datetime.now()
     market = coinmarketcap.Market()
-    coin = market.ticker(COIN_NAME, convert="EUR")
-    message = "\n+Marketcap " + COIN_ACRONYM + "(" + str('{:%d/%m/%Y - %H:%M:%S}'.format(datetime(Now.year, Now.month, Now.day, Now.hour, Now.minute, Now.second))) + ")" + \
+    coin = market.ticker(cfg['COIN']['name'], convert="EUR")
+    message = "\n+Marketcap " + cfg['COIN']['acronym'] + "(" + str('{:%d/%m/%Y - %H:%M:%S}'.format(datetime(Now.year, Now.month, Now.day, Now.hour, Now.minute, Now.second))) + ")" + \
     "\nRanking       = " + coin[0]['rank'] + \
     "\nPrecio EUR    = " + coin[0]['price_eur'] + " €" + \
     "\nPrecio BTC    = " + coin[0]['price_btc'] + \
@@ -98,29 +84,29 @@ def mostrar_balance():
     Tabla.field_names = ["MN", "Balance"]
 
     #Get balance for all nodes
-    for mn in sorted(dict.keys(MASTERNODE_LIST)):
-        MN_Current_Coins = get_balance(MASTERNODE_LIST[mn][2])
+    for mn in cfg['MASTERNODES']:
+        MN_Current_Coins = get_balance(mn['address'])
         Total_Balance += MN_Current_Coins
-        Tabla.add_row([mn, "{0:.{1}f}".format(MN_Current_Coins, DECIMALS)])
+        Tabla.add_row([mn['name'], "{0:.{1}f}".format(MN_Current_Coins, cfg['COIN']['decimals'])])
 
     #Get balance for other addresses
-    for oaddr in sorted(dict.keys(OTHER_ADDRESS_LIST)):
-        OADDR_Current_Coins = get_balance(OTHER_ADDRESS_LIST[oaddr])
+    for oaddr in cfg['OTHER_ADDRESSES']:
+        OADDR_Current_Coins = get_balance(oaddr['address'])
         Total_Balance += OADDR_Current_Coins
-        Tabla.add_row([oaddr, "{0:.{1}f}".format(OADDR_Current_Coins, DECIMALS)])
+        Tabla.add_row([oaddr['name'], "{0:.{1}f}".format(OADDR_Current_Coins, cfg['COIN']['decimals'])])
 
     #Ponemos todo en el mensajito de vuelta
     message = '\n' + \
-    '+Balance ' + COIN_ACRONYM +'\n' + \
+    '+Balance ' + cfg['COIN']['acronym'] +'\n' + \
     Tabla.get_string() + '\n'  \
-    '-Total:  '+"{0:.{1}f}".format(Total_Balance, DECIMALS)
+    '-Total:  '+"{0:.{1}f}".format(Total_Balance, cfg['COIN']['decimals'])
 
     return message
 
 def mostrar_rendimiento():
     #Coge el valor actual de la moneda
     market = coinmarketcap.Market()
-    coin = market.ticker(COIN_NAME, convert="EUR")
+    coin = market.ticker(cfg['COIN']['name'], convert="EUR")
 
     #Para calcular el total
     Total_EUR_Day   = 0.0
@@ -128,17 +114,17 @@ def mostrar_rendimiento():
 
     #Construimos la dichosa tablita
     Tabla = PrettyTable()
-    Tabla.field_names = ["MN", COIN_ACRONYM+"/Dia", "EUR/Dia"]
+    Tabla.field_names = ["MN", cfg['COIN']['acronym']+"/Dia", "EUR/Dia"]
 
     #Get balance for all nodes
-    for mn in sorted(dict.keys(MASTERNODE_LIST)):
-        MN_Init_Date = MASTERNODE_LIST[mn][0]
-        MN_Initial_Coins = MASTERNODE_LIST[mn][1]
-        MN_Current_Coins = get_balance(MASTERNODE_LIST[mn][2])
+    for mn in cfg['MASTERNODES']:
+        MN_Init_Date     = mn['setup_date']
+        MN_Initial_Coins = mn['setup_balance']
+        MN_Current_Coins = get_balance(mn['address'])
         MN_Running_Days  = get_running_days(MN_Init_Date)+1
-        MN_Coins_Day     = round((MN_Current_Coins-MN_Initial_Coins)/MN_Running_Days, DECIMALS)
-        MN_EUR_Day       = round(MN_Coins_Day*float(coin[0]['price_eur']),DECIMALS)
-        Tabla.add_row([mn, "{0:.{1}f}".format(MN_Coins_Day, DECIMALS), "{0:.{1}f}".format(MN_EUR_Day, 2)])
+        MN_Coins_Day     = round((MN_Current_Coins-MN_Initial_Coins)/MN_Running_Days, cfg['COIN']['decimals'])
+        MN_EUR_Day       = round(MN_Coins_Day*float(coin[0]['price_eur']), cfg['COIN']['decimals'])
+        Tabla.add_row([mn['name'], "{0:.{1}f}".format(MN_Coins_Day, cfg['COIN']['decimals']), "{0:.{1}f}".format(MN_EUR_Day, 2)])
         #Total Computation
         Total_EUR_Day    += MN_EUR_Day
         Total_Coins_Day  += MN_Coins_Day
@@ -147,7 +133,7 @@ def mostrar_rendimiento():
     message = "\n" + \
     "+Rendimiento MNs\n" + \
     Tabla.get_string()+ '\n'  \
-    '-Total:  '+"{0:.{1}f}".format(Total_Coins_Day,DECIMALS)+"     "+"{0:.{1}f}".format(Total_EUR_Day, 2)
+    '-Total:  '+"{0:.{1}f}".format(Total_Coins_Day, cfg['COIN']['decimals'])+"     "+"{0:.{1}f}".format(Total_EUR_Day, 2)
 
     return message
 
@@ -167,7 +153,7 @@ def comando_bot(cmd):
 
 @client.event
 async def on_ready():
-    print(COIN_NAME + " BOT funcionando")
+    print(cfg['COIN']['name'] + " BOT funcionando")
 
 @client.event
 async def on_message(message):
@@ -175,4 +161,4 @@ async def on_message(message):
         return_message = comando_bot(message.content.upper()[5:])
         await client.send_message(message.channel, "```diff" + return_message + "\n```")
 
-client.run(DISCORD_API_KEY)
+client.run(cfg['DISCORD']['api_key'])
