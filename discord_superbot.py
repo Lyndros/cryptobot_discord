@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
-# Copyright (c) 2018 Lyndros
+# Copyright (c) 2018 Lyndros <lyndros@hotmail.com>
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+###################################################################
+# If you want o support this repository I accept donations        #
+# even 1 TOK is always welcome :-)!                               #
+# > ethereum address: 0x44F102616C8e19fF3FED10c0b05B3d23595211ce  #
+# > tokugawa address: TjrQBaaCPoVW9mPAZHPfVx9JJCq7yZ7QnA          #
+###################################################################
 
 import discord
 import requests

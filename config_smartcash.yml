@@ -1,20 +1,29 @@
+###################################################################
+# If you want o support this repository I accept donations        #
+# even 1 TOK is always welcome :-)!                               #
+# > ethereum address: 0x44F102616C8e19fF3FED10c0b05B3d23595211ce  #
+# > tokugawa address: TjrQBaaCPoVW9mPAZHPfVx9JJCq7yZ7QnA          #
+###################################################################
+
+#SECTION FOR COIN SPECIFIC PARAMETERS
 COIN:
     name:           Smartcash
     acronym:        SMART
     decimals:       8
     explorer_url:   https://insight.smartcash.cc/api/addr/
 
+#SECTION FOR MASTERNODES
 MASTERNODES:
     - name:           MN01
       setup_date:     29/07/2018
       setup_balance:  10096.26363000
       address:        Sdu8FKa3yWNe3wXQv1qGu64XnvT89vprnK
 
-#THESE ADDRESSES WILL BE LISTED IN BALANCE BUT NOT TAKEN INTO ACCOUNT FOR PERFORMANCE
-#SINCE THEY ARE NOT ATTACHED TO ANY MASTERNODE
+#SECTION FOR OTHER ADDRESSES SHOWN IN BALANCE WHICH ARE NOT MASTERNODES
 OTHER_ADDRESSES:
     - name:           PERS
       address:        SMqCeDfuxWQD2MgTYzdoN7ijkfKGtZvEUZ
 
+#SECTION FOR DISCORD PARAMETERS
 DISCORD:
     api_key:          123456789example

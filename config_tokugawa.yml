@@ -1,9 +1,18 @@
+###################################################################
+# If you want o support this repository I accept donations        #
+# even 1 TOK is always welcome :-)!                               #
+# > ethereum address: 0x44F102616C8e19fF3FED10c0b05B3d23595211ce  #
+# > tokugawa address: TjrQBaaCPoVW9mPAZHPfVx9JJCq7yZ7QnA          #
+###################################################################
+
+#SECTION FOR COIN SPECIFIC PARAMETERS
 COIN:
     name:           Tokugawa
     acronym:        TOK
     decimals:       6
     explorer_url:   http://explorer.tokugawacoin.com/ext/getaddress/
 
+#SECTION FOR MASTERNODES
 MASTERNODES:
     - name:           MN01
       setup_date:     27/08/2018
@@ -45,11 +54,11 @@ MASTERNODES:
       setup_balance:  2500
       address:        TfGaZcxcDKbFqa9N1WRRfU6A3KWKcRvff2
 
-#THESE ADDRESSES WILL BE LISTED IN BALANCE BUT NOT TAKEN INTO ACCOUNT FOR PERFORMANCE
-#SINCE THEY ARE NOT ATTACHED TO ANY MASTERNODE
+#SECTION FOR OTHER ADDRESSES SHOWN IN BALANCE WHICH ARE NOT MASTERNODES
 OTHER_ADDRESSES:
     - name:           PERS
       address:        TjrQBaaCPoVW9mPAZHPfVx9JJCq7yZ7QnA
 
+#SECTION FOR DISCORD PARAMETERS
 DISCORD:
     api_key:          123456789example
