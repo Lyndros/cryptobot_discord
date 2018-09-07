@@ -44,8 +44,8 @@ client = commands.Bot(command_prefix = "!")
 lista_comandos = {
   "AYUDA":        "Muestra esta ayuda.",
   "PRECIO":       "Muestra el precio actual de la moneda.",
-  "BALANCE":      "Muestra un resumen el balance actual de los MNs.",
-  "RENDIMIENTO":  "Muestra el precio actual de la moneda."
+  "BALANCE":      "Muestra el balance actual de todas las cuentas.",
+  "RENDIMIENTO":  "Muestra el rendimiendo actual de los MNs"
 }
 
 def get_running_days(date_epoch):
@@ -101,19 +101,19 @@ def mostrar_balance():
     for mn in sorted(dict.keys(MASTERNODE_LIST)):
         MN_Current_Coins = get_balance(MASTERNODE_LIST[mn][2])
         Total_Balance += MN_Current_Coins
-        Tabla.add_row([mn, MN_Current_Coins])
+        Tabla.add_row([mn, "{0:.{1}f}".format(MN_Current_Coins, DECIMALS)])
 
     #Get balance for other addresses
     for oaddr in sorted(dict.keys(OTHER_ADDRESS_LIST)):
         OADDR_Current_Coins = get_balance(OTHER_ADDRESS_LIST[oaddr])
         Total_Balance += OADDR_Current_Coins
-        Tabla.add_row([oaddr, OADDR_Current_Coins])
+        Tabla.add_row([oaddr, "{0:.{1}f}".format(OADDR_Current_Coins, DECIMALS)])
 
     #Ponemos todo en el mensajito de vuelta
     message = '\n' + \
     '+Balance ' + COIN_ACRONYM +'\n' + \
     Tabla.get_string() + '\n'  \
-    '-Total:  '+str(round(Total_Balance,DECIMALS))
+    '-Total:  '+"{0:.{1}f}".format(Total_Balance, DECIMALS)
 
     return message
 
@@ -135,10 +135,10 @@ def mostrar_rendimiento():
         MN_Init_Date = MASTERNODE_LIST[mn][0]
         MN_Initial_Coins = MASTERNODE_LIST[mn][1]
         MN_Current_Coins = get_balance(MASTERNODE_LIST[mn][2])
-        MN_Running_Days  = get_running_days(MN_Init_Date)
-        MN_Coins_Day     = round((MN_Current_Coins-MN_Initial_Coins)/MN_Running_Days,DECIMALS)
+        MN_Running_Days  = get_running_days(MN_Init_Date)+1
+        MN_Coins_Day     = round((MN_Current_Coins-MN_Initial_Coins)/MN_Running_Days, DECIMALS)
         MN_EUR_Day       = round(MN_Coins_Day*float(coin[0]['price_eur']),DECIMALS)
-        Tabla.add_row([mn, MN_Coins_Day, MN_EUR_Day])
+        Tabla.add_row([mn, "{0:.{1}f}".format(MN_Coins_Day, DECIMALS), "{0:.{1}f}".format(MN_EUR_Day, 2)])
         #Total Computation
         Total_EUR_Day    += MN_EUR_Day
         Total_Coins_Day  += MN_Coins_Day
@@ -147,7 +147,7 @@ def mostrar_rendimiento():
     message = "\n" + \
     "+Rendimiento MNs\n" + \
     Tabla.get_string()+ '\n'  \
-    '-Total:  '+str(round(Total_Coins_Day,DECIMALS))+"  "+str(round(Total_EUR_Day,2))
+    '-Total:  '+"{0:.{1}f}".format(Total_Coins_Day,DECIMALS)+"     "+"{0:.{1}f}".format(Total_EUR_Day, 2)
 
     return message
 
