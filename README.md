@@ -1,7 +1,7 @@
 <html>
 <body style="font-family: Consolas, monospace; font-size:14pt;">
-<br/> <b>Discord BOT Installation instructions</b>
-<br/> ─────────────────────────────────────────────────────────────────────────────────
+<b>Discord BOT Installation instructions</b>
+<br/> ────────────────────────────────────────────────────
 <br/>
 <br/> A beautiful discord bot that allows you to track your favourite masternodes balances and performances.
 <br/>
