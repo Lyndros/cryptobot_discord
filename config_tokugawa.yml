@@ -15,44 +15,49 @@ COIN:
 #SECTION FOR MASTERNODES
 MASTERNODES:
     - name:           MN01
-      setup_date:     27/08/2018
+      setup_date:     13/09/2018
       setup_balance:  2500
       address:        TbP5rmPKGbKczVo3bR7qDk5z6YVN2N3hJA
 
     - name:           MN02
-      setup_date:     27/08/2018
+      setup_date:     13/09/2018
       setup_balance:  2500
       address:        TrWZwDC5qVhSz92wTYGo1QbpZayPu3NKik
 
     - name:           MN03
-      setup_date:     27/08/2018
+      setup_date:     13/09/2018
       setup_balance:  2500
       address:        TojPwoewgNJZWwazQyojCey8dKwSZYQzqC
 
     - name:           MN04
-      setup_date:     27/08/2018
+      setup_date:     13/09/2018
       setup_balance:  2500
       address:        TiCLkMYy5PGT3oCBypaBgjfN6WkSJtufyt
 
     - name:           MN05
-      setup_date:     27/08/2018
+      setup_date:     13/09/2018
       setup_balance:  2500
       address:        TaB8NZnd92B1jJjxn567S9YroeAYf1LC4E
 
     - name:           MN06
-      setup_date:     27/08/2018
+      setup_date:     13/09/2018
       setup_balance:  2500
       address:        Tc5CLGBGJYdjjLnPmTmQ8ZUo9nbpsUYQUX
 
     - name:           MN07
-      setup_date:     27/08/2018
+      setup_date:     13/09/2018
       setup_balance:  2500
       address:        TvNNBWqSE12yfGtucUszA8WfQTNsZzNMaU
 
     - name:           MN08
-      setup_date:     27/08/2018
+      setup_date:     13/09/2018
       setup_balance:  2500
       address:        TfGaZcxcDKbFqa9N1WRRfU6A3KWKcRvff2
+
+    - name:           MN09
+      setup_date:     13/09/2018
+      setup_balance:  2500
+      address:        Ttdr5EhpTE45vp12dUHBsz5AgSZfgCJPFR
 
 #SECTION FOR OTHER ADDRESSES SHOWN IN BALANCE WHICH ARE NOT MASTERNODES
 OTHER_ADDRESSES:
