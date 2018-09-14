@@ -37,10 +37,12 @@
 <br/> You can check the predefine bot services available in: https://github.com/Lyndros/crypto_tools/blob/master/services/.
 <br/>
 <br/> i.e: Adding tokugawa bot service,
+<br/> &nbsp; &nbsp; $cd /etc/systemd/system/
 <br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/crypto_tools/master/services/tokugawa_bot.service
 <br/> &nbsp; &nbsp; $systemctl enable tokugawa_bot.service
 <br/> 
 <br/> i.e: Adding smartcash bot service,
+<br/> &nbsp; &nbsp; $cd /etc/systemd/system/
 <br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/crypto_tools/master/services/smartcash_bot.service
 <br/> &nbsp; &nbsp; $systemctl enable smartcash_bot.service
 <br/>
