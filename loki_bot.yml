@@ -1,0 +1,24 @@
+###################################################################
+# If you want o support this repository I accept donations        #
+# even 1 TOK is always welcome :-)!                               #
+# > ethereum address: 0x44F102616C8e19fF3FED10c0b05B3d23595211ce  #
+# > tokugawa address: TjrQBaaCPoVW9mPAZHPfVx9JJCq7yZ7QnA          #
+###################################################################
+
+#SECTION FOR COIN SPECIFIC PARAMETERS
+COIN:
+    name:           Loki
+    acronym:        Loki
+    decimals:       10
+    explorer_url:   file:///tmp/loki_balance.txt
+
+#SECTION FOR MASTERNODES
+MASTERNODES:
+    - name:           SN01
+      setup_date:     20/09/2018
+      setup_balance:  45005
+      address:        L28478234fjasdfaexample
+
+#SECTION FOR DISCORD PARAMETERS
+DISCORD:
+    api_key:          123456789example

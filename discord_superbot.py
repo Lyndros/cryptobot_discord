@@ -52,14 +52,25 @@ def get_running_days(date_epoch):
     return delta.days
 
 def get_balance(address):
-    url = cfg['COIN']['explorer_url'] + address
-    req = requests.get(url)
-    status_code = req.status_code
-    if status_code == 200:
-        #Limit to 6 decimals
-        return round(float(json.loads(req.text)['balance']),cfg['COIN']['decimals'])
+    #Read balance from local file
+    if cfg['COIN']['explorer_url'][0:7]=='file://':
+        with open(cfg['COIN']['explorer_url'][7:]) as balance_file:
+            for line in balance_file:
+                wallet_address, balance = line.split()
+                if wallet_address==address:
+                    return round(float(balance),cfg['COIN']['decimals'])
+    #Get value from explorer
     else:
-        return None
+        url = cfg['COIN']['explorer_url'] + address
+        req = requests.get(url)
+        status_code = req.status_code
+        if status_code == 200:
+            #Limit to decimals
+            return round(float(json.loads(req.text)['balance']),cfg['COIN']['decimals'])
+
+    #Return none if not found
+    return None
+
 
 def mostrar_ayuda():
     message="\n+Lista de comandos:\n"
