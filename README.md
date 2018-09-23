@@ -9,9 +9,9 @@
 <br/>
 <br/> In order to run this program the following python3 and the following libraries need to be installed:
 <br/> &nbsp; &nbsp; $sudo apt-get install python3-pip python3-yaml
-<br/> &nbsp; &nbsp; $sudo pip install -U discord.py
-<br/> &nbsp; &nbsp; $sudo pip install coinmarketcap
-<br/> &nbsp; &nbsp; $sudo pip install PrettyTable
+<br/> &nbsp; &nbsp; $sudo pip3 install -U discord.py
+<br/> &nbsp; &nbsp; $sudo pip3 install coinmarketcap
+<br/> &nbsp; &nbsp; $sudo pip3 install PrettyTable
 <br/>
 <br/> <b>1. Copying the necessary files</b>
 <br/>
