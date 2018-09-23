@@ -189,13 +189,12 @@ def mostrar_inversores():
 
         #Loop through all investors for current MN
         for inv in my_investors:
-            print(inv)
-            inv_percent   = (float(inv['coins'])/float(cfg['COIN']['collateral']))*100
+            inv_percent   = (float(inv['coins'])/float(cfg['COIN']['collateral']))*100.0
             inv_generated = float(MN_Generated)*(inv_percent/100.0)
-            inv_total = float(inv['coins']) + inv_generated
-            Tabla.add_row([inv['name'], "{0:.{1}f}".format(inv_percent, 2), "{0:.{1}f}".format(inv_generated, cfg['COIN']['decimals']), format(inv_total, cfg['COIN']['decimals'])])
+            inv_total     = float(inv['coins']) + inv_generated
+            Tabla.add_row([inv['name'], "{0:.{1}f}".format(inv_percent, 2), "{0:.{1}f}".format(inv_generated, cfg['COIN']['decimals']), "{0:.{1}f}".format(inv_total, cfg['COIN']['decimals'])])
 
-        message += '\n' + Tabla.get_string() + '\n' '-Total:  ' + "{0:.{1}f}".format(MN_Generated, cfg['COIN']['decimals'])
+        message += '\n' + Tabla.get_string() + '\n' '-Total:  ' + "{0:.{1}f}".format(MN_Generated, cfg['COIN']['decimals']) + " " + cfg['COIN']['acronym']
 
     return message
 
