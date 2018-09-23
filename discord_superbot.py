@@ -40,7 +40,7 @@ lista_comandos = {
   "PRECIO":             "Muestra el precio actual de la moneda.",
   "BALANCE":            "Muestra el balance actual de todas las cuentas.",
   "INVERSORES":         "Muestra el balance individual de todos los inversores.",
-  "RENDIMIENTO":        "Muestra el rendimiendo actual de los MNs"
+  "RENDIMIENTO":        "Muestra el rendimiendo actual de los MNs",
 }
 
 def get_running_days(date_epoch):
