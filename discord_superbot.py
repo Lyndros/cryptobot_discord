@@ -193,9 +193,9 @@ def mostrar_inversores():
             inv_percent   = (float(inv['coins'])/float(cfg['COIN']['collateral']))*100
             inv_generated = float(MN_Generated)*(inv_percent/100.0)
             inv_total = float(inv['coins']) + inv_generated
-            Tabla.add_row([inv['name'], "{0:.{2}f}".format(inv_percent), inv_generated, inv_total])
+            Tabla.add_row([inv['name'], "{0:.{1}f}".format(inv_percent, 2), "{0:.{1}f}".format(inv_generated, cfg['COIN']['decimals']), format(inv_total, cfg['COIN']['decimals'])])
 
-        message += '\n' + Tabla.get_string() + '\n' '-Total:  ' + "{0:.{1}f}".format(Total_Balance, cfg['COIN']['decimals'])
+        message += '\n' + Tabla.get_string() + '\n' '-Total:  ' + "{0:.{1}f}".format(MN_Generated, cfg['COIN']['decimals'])
 
     return message
 
