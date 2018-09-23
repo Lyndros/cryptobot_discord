@@ -103,13 +103,15 @@ def mostrar_balance():
     Tabla.field_names = ["MN", "Balance"]
 
     #Get balance for all nodes
-    for mn in cfg['MASTERNODES']:
+    my_addresses = cfg['MASTERNODES'] if ('MASTERNODES' in cfg.keys()) else [];
+    for mn in my_addresses:
         MN_Current_Coins = get_balance(mn['address'])
         Total_Balance += MN_Current_Coins
         Tabla.add_row([mn['name'], "{0:.{1}f}".format(MN_Current_Coins, cfg['COIN']['decimals'])])
 
     #Get balance for other addresses
-    for oaddr in cfg['OTHER_ADDRESSES']:
+    my_addresses = cfg['OTHER_ADDRESSES'] if ('OTHER_ADDRESSES' in cfg.keys()) else [];
+    for oaddr in my_addresses:
         OADDR_Current_Coins = get_balance(oaddr['address'])
         Total_Balance += OADDR_Current_Coins
         Tabla.add_row([oaddr['name'], "{0:.{1}f}".format(OADDR_Current_Coins, cfg['COIN']['decimals'])])
@@ -136,7 +138,8 @@ def mostrar_rendimiento():
     Tabla.field_names = ["MN", cfg['COIN']['acronym']+"/Dia", "EUR/Dia"]
 
     #Get balance for all nodes
-    for mn in cfg['MASTERNODES']:
+    my_addresses = cfg['MASTERNODES'] if ('MASTERNODES' in cfg.keys()) else [];
+    for mn in my_addresses:
         MN_Init_Date     = mn['setup_date']
         MN_Initial_Coins = mn['setup_balance']
         MN_Current_Coins = get_balance(mn['address'])

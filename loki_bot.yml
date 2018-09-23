@@ -11,14 +11,22 @@ COIN:
     acronym:        Loki
     decimals:       10
     explorer_url:   file:///tmp/loki_balance.txt
+    collateral:     45000
 
 #SECTION FOR MASTERNODES
 MASTERNODES:
     - name:           SN01
       setup_date:     20/09/2018
       setup_balance:  45005
-      address:        L28478234fjasdfaexample
+      address:        LA13298ZCZXZXAS_ADDRESS_EXAMPLE
+      INVESTORS:
+        - name:       Ikanuki
+          coins:      18300
+        - name:       Lyndros
+          coins:      15000
+        - name:       Jaime
+          coins:      11700
 
 #SECTION FOR DISCORD PARAMETERS
 DISCORD:
-    api_key:          123456789example
+    api_key:          3SDFAMXZCJKSAFD_API_KEY_EXAMPLE
