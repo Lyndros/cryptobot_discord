@@ -169,13 +169,13 @@ def mostrar_inversores():
     Total_Balance = 0.0
 
     #Init return message
-    message = "\n"
+    message = ""
 
     #Get balance for all nodes
     my_addresses = cfg['MASTERNODES'] if ('MASTERNODES' in cfg.keys()) else [];
     for mn in my_addresses:
         # Ponemos titulo a la tabla de inversores por masternodo
-        message += '+Inversores ' + mn['name']
+        message += '\n+Inversores ' + mn['name']
 
         # Construimos la dichosa tablita
         Tabla = PrettyTable()
