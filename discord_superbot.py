@@ -182,19 +182,20 @@ def mostrar_inversores():
         Tabla.field_names = ['Nombre', 'Porcentaje', 'Generado', 'Total']
 
         MN_Current_Coins = get_balance(mn['address'])
-        MN_Generated = MN_Current_Coins - float(cfg['COIN']['collateral']))
+        MN_Generated = MN_Current_Coins - float(cfg['COIN']['collateral'])
 
         # Get inverstors for current masternode
-        my_investors = mn['INVESTORS'] if ('INVESTORS' in cfg.keys()) else [];
+        my_investors = mn['INVESTORS'] if ('INVESTORS' in mn.keys()) else [];
 
         #Loop through all investors for current MN
         for inv in my_investors:
+            print(inv)
             inv_percent   = (float(inv['coins'])/float(cfg['COIN']['collateral']))*100
             inv_generated = float(MN_Generated)*(inv_percentaje/100.0)
             inv_total = float(inv['coins']) + inv_generated
             Tabla.add_row(inv['name'], inv_percent, inv_generated, inv_total)
 
-        message += Tabla.get_string() + '\n' '-Total:  ' + "{0:.{1}f}".format(Total_Balance, cfg['COIN']['decimals'])
+        message += '\n' + Tabla.get_string() + '\n' '-Total:  ' + "{0:.{1}f}".format(Total_Balance, cfg['COIN']['decimals'])
 
     return message
 
