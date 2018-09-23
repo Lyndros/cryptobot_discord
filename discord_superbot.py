@@ -39,7 +39,7 @@ lista_comandos = {
   "AYUDA":              "Muestra esta ayuda.",
   "PRECIO":             "Muestra el precio actual de la moneda.",
   "BALANCE":            "Muestra el balance actual de todas las cuentas.",
-  "INVERSORES":         "Muestra el balance individual de todos los inversores."
+  "INVERSORES":         "Muestra el balance individual de todos los inversores.",
   "RENDIMIENTO":        "Muestra el rendimiendo actual de los MNs"
 }
 
