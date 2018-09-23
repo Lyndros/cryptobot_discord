@@ -182,7 +182,7 @@ def mostrar_inversores():
         Tabla.field_names = ['Nombre', '%', 'Generado', 'Total']
 
         MN_Current_Coins = get_balance(mn['address'])
-        MN_Generated = MN_Current_Coins - float(cfg['COIN']['collateral'])
+        MN_Generated = MN_Current_Coins - float(mn['setup_balance'])
 
         # Get inverstors for current masternode
         my_investors = mn['INVESTORS'] if ('INVESTORS' in mn.keys()) else [];
