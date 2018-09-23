@@ -179,7 +179,7 @@ def mostrar_inversores():
 
         # Construimos la dichosa tablita
         Tabla = PrettyTable()
-        Tabla.field_names = ['Nombre', 'Porcentaje', 'Generado', 'Total']
+        Tabla.field_names = ['Nombre', '\%', 'Generado', 'Total']
 
         MN_Current_Coins = get_balance(mn['address'])
         MN_Generated = MN_Current_Coins - float(cfg['COIN']['collateral'])
@@ -192,7 +192,7 @@ def mostrar_inversores():
             inv_percent   = (float(inv['coins'])/float(cfg['COIN']['collateral']))*100.0
             inv_generated = float(MN_Generated)*(inv_percent/100.0)
             inv_total     = float(inv['coins']) + inv_generated
-            Tabla.add_row([inv['name'], "{0:.{1}f}".format(inv_percent, 2), "{0:.{1}f}".format(inv_generated, cfg['COIN']['decimals']), "{0:.{1}f}".format(inv_total, cfg['COIN']['decimals'])])
+            Tabla.add_row([inv['name'], "{0:.{1}f}\%".format(inv_percent, 2), "{0:.{1}f}".format(inv_generated, cfg['COIN']['decimals']), "{0:.{1}f}".format(inv_total, cfg['COIN']['decimals'])])
 
         message += '\n' + Tabla.get_string() + '\n' '-Total:  ' + "{0:.{1}f}".format(MN_Generated, cfg['COIN']['decimals']) + " " + cfg['COIN']['acronym']
 
