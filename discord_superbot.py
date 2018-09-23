@@ -36,10 +36,11 @@ Client = discord.Client()
 client = commands.Bot(command_prefix = "!")
 
 lista_comandos = {
-  "AYUDA":        "Muestra esta ayuda.",
-  "PRECIO":       "Muestra el precio actual de la moneda.",
-  "BALANCE":      "Muestra el balance actual de todas las cuentas.",
-  "RENDIMIENTO":  "Muestra el rendimiendo actual de los MNs"
+  "AYUDA":              "Muestra esta ayuda.",
+  "PRECIO":             "Muestra el precio actual de la moneda.",
+  "BALANCE":            "Muestra el balance actual de todas las cuentas.",
+  "INVERSORES":         "Muestra el balance individual de todos los inversores."
+  "RENDIMIENTO":        "Muestra el rendimiendo actual de los MNs"
 }
 
 def get_running_days(date_epoch):
@@ -75,7 +76,6 @@ def get_balance(address):
 
     #Return none if not found
     return None
-
 
 def mostrar_ayuda():
     message="\n+Lista de comandos:\n"
@@ -164,6 +164,40 @@ def mostrar_rendimiento():
 
     return message
 
+def mostrar_inversores():
+    #Variable para calcular el balance total
+    Total_Balance = 0.0
+
+    #Init return message
+    message = "\n"
+
+    #Get balance for all nodes
+    my_addresses = cfg['MASTERNODES'] if ('MASTERNODES' in cfg.keys()) else [];
+    for mn in my_addresses:
+        # Ponemos titulo a la tabla de inversores por masternodo
+        message += '+Inversores ' + mn['name']
+
+        # Construimos la dichosa tablita
+        Tabla = PrettyTable()
+        Tabla.field_names = ['Nombre', 'Porcentaje', 'Generado', 'Total']
+
+        MN_Current_Coins = get_balance(mn['address'])
+        MN_Generated = MN_Current_Coins - float(cfg['COIN']['collateral']))
+
+        # Get inverstors for current masternode
+        my_investors = mn['INVESTORS'] if ('INVESTORS' in cfg.keys()) else [];
+
+        #Loop through all investors for current MN
+        for inv in my_investors:
+            inv_percent   = (float(inv['coins'])/float(cfg['COIN']['collateral']))*100
+            inv_generated = float(MN_Generated)*(inv_percentaje/100.0)
+            inv_total = float(inv['coins']) + inv_generated
+            Tabla.add_row(inv['name'], inv_percent, inv_generated, inv_total)
+
+        message += Tabla.get_string() + '\n' '-Total:  ' + "{0:.{1}f}".format(Total_Balance, cfg['COIN']['decimals'])
+
+    return message
+
 def comando_bot(cmd):
     if   (cmd == "AYUDA"):
         message = mostrar_ayuda()
@@ -171,6 +205,8 @@ def comando_bot(cmd):
         message = mostrar_precio()
     elif (cmd == "BALANCE"):
         message = mostrar_balance()
+    elif (cmd == "INVERSORES"):
+        message = mostrar_inversores()
     elif (cmd == "RENDIMIENTO"):
         message =  mostrar_rendimiento()
     else:
