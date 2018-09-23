@@ -8,7 +8,7 @@
 #SECTION FOR COIN SPECIFIC PARAMETERS
 COIN:
     name:           Loki
-    acronym:        Loki
+    acronym:        LOKI
     decimals:       10
     explorer_url:   file:///tmp/loki_balance.txt
     collateral:     45000

@@ -58,7 +58,12 @@ def get_balance(address):
             for line in balance_file:
                 wallet_address, balance = line.split()
                 if wallet_address==address:
-                    return round(float(balance),cfg['COIN']['decimals'])
+                    #LOKI PATCH WE NEED TO REDUCE COLLATERAL
+                    if cfg['COIN']['acronym'] == 'LOKI':
+                        return round(float(balance)-float(cfg['COIN']['collateral']),cfg['COIN']['decimals'])
+                    else:
+                        return round(float(balance), cfg['COIN']['decimals'])
+
     #Get value from explorer
     else:
         url = cfg['COIN']['explorer_url'] + address
