@@ -22,9 +22,9 @@ MASTERNODES:
       #If you have a share masternode and want to show investors information
       INVESTORS:
         - name:       INVESTOR_NAME_1
-          coins:      15000
+          coins:      5000
         - name:       INVESTOR_NAME_1
-          coins:      15000
+          coins:      5000
 
 #SECTION FOR OTHER ADDRESSES SHOWN IN BALANCE WHICH ARE NOT MASTERNODES
 OTHER_ADDRESSES:
