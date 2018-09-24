@@ -17,16 +17,16 @@ COIN:
 MASTERNODES:
     - name:           SN01
       setup_date:     20/09/2018
-      setup_balance:  45005
-      address:        LA13298ZCZXZXAS_ADDRESS_EXAMPLE
+      setup_balance:  45005                         #Indicate start balance was higher than collateral
+      address:        YOUR_MASTERNODE_ADDRESS
       INVESTORS:
-        - name:       Ikanuki
-          coins:      18300
-        - name:       Lyndros
+        - name:       INVESTOR_NAME_1
           coins:      15000
-        - name:       Jaime
-          coins:      11700
+        - name:       INVESTOR_NAME_1
+          coins:      15000
+        - name:       INVESTOR_NAME_1
+          coins:      15000
 
 #SECTION FOR DISCORD PARAMETERS
 DISCORD:
-    api_key:          3SDFAMXZCJKSAFD_API_KEY_EXAMPLE
+    api_key:          YOUR_DISCORD_API_KEY
