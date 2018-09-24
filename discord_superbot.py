@@ -105,6 +105,7 @@ def mostrar_balance():
 
     #Construimos la dichosa tablita
     Tabla = PrettyTable()
+    Tabla.padding_width = 0
     Tabla.field_names = ["MN", "Balance"]
 
     #Get balance for all nodes
@@ -122,10 +123,9 @@ def mostrar_balance():
         Tabla.add_row([oaddr['name'], "{0:.{1}f}".format(OADDR_Current_Coins, cfg['COIN']['decimals'])])
 
     #Ponemos todo en el mensajito de vuelta
-    message = '\n' + \
-    '+Balance ' + cfg['COIN']['acronym'] +'\n' + \
+    message = '\n+Balance General\n' + \
     Tabla.get_string() + '\n'  \
-    '-Total:  '+"{0:.{1}f}".format(Total_Balance, cfg['COIN']['decimals'])
+    '-Total:  '+"{0:.{1}f}".format(Total_Balance, cfg['COIN']['decimals']) + ' ' + cfg['COIN']['acronym'] + '\n'
 
     return message
 
@@ -140,7 +140,8 @@ def mostrar_rendimiento():
 
     #Construimos la dichosa tablita
     Tabla = PrettyTable()
-    Tabla.field_names = ["MN", cfg['COIN']['acronym']+"/Dia", "EUR/Dia"]
+    Tabla.padding_width = 0
+    Tabla.field_names = ["MN", cfg['COIN']['acronym']+"/Dia", "€/Dia"]
 
     #Get balance for all nodes
     my_addresses = cfg['MASTERNODES'] if ('MASTERNODES' in cfg.keys()) else [];
@@ -157,10 +158,9 @@ def mostrar_rendimiento():
         Total_Coins_Day  += MN_Coins_Day
 
     #Ponemos todo en el mensajito de vuelta
-    message = "\n" + \
-    "+Rendimiento MNs\n" + \
+    message = "\n+Rendimiento MNs\n" + \
     Tabla.get_string()+ '\n'  \
-    '-Total:  '+"{0:.{1}f}".format(Total_Coins_Day, cfg['COIN']['decimals'])+"    "+"{0:.{1}f}".format(Total_EUR_Day, 2)
+    '-Total:  '+"{0:.{1}f}".format(Total_Coins_Day, cfg['COIN']['decimals'])+' '+"{0:.{1}f}".format(Total_EUR_Day, 2)  + '\n'
 
     return message
 
@@ -179,10 +179,11 @@ def mostrar_inversores():
 
         # Construimos la dichosa tablita
         Tabla = PrettyTable()
-        Tabla.field_names = ['Nombre', '%', 'Generado', 'Total']
+        Tabla.padding_width = 0
+        Tabla.field_names = ['Nombre', '(%)', 'Mined', 'Total']
 
         MN_Current_Coins = get_balance(mn['address'])
-        MN_Generated = MN_Current_Coins - float(mn['setup_balance'])
+        MN_Generated     = MN_Current_Coins - float(mn['setup_balance'])
 
         # Get inverstors for current masternode
         my_investors = mn['INVESTORS'] if ('INVESTORS' in mn.keys()) else [];
@@ -194,7 +195,7 @@ def mostrar_inversores():
             inv_total     = float(inv['coins']) + inv_generated
             Tabla.add_row([inv['name'], "{0:.{1}f}".format(inv_percent, 2), "{0:.{1}f}".format(inv_generated, cfg['COIN']['decimals']), "{0:.{1}f}".format(inv_total, cfg['COIN']['decimals'])])
 
-        message += '\n' + Tabla.get_string() + '\n' '-Total:  ' + "{0:.{1}f}".format(MN_Generated, cfg['COIN']['decimals']) + " " + cfg['COIN']['acronym']
+        message += '\n' + Tabla.get_string() + '\n' '-Total Mined:  ' + "{0:.{1}f}".format(MN_Generated, cfg['COIN']['decimals']) + ' ' + cfg['COIN']['acronym'] + '\n'
 
     return message
 
