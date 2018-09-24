@@ -160,7 +160,7 @@ def mostrar_rendimiento():
     #Ponemos todo en el mensajito de vuelta
     message = "\n+Rendimiento MNs\n" + \
     Tabla.get_string()+ '\n'  \
-    '-Total: ' + "{0:.{1}f}".format(Total_Coins_Day, cfg['COIN']['decimals']) + ' ' + cfg['COIN']['acronym'] + "{0:.{1}f}".format(Total_EUR_Day, 2) + '€\n'
+    '-Total: ' + "{0:.{1}f}".format(Total_Coins_Day, cfg['COIN']['decimals']) + ' ' + cfg['COIN']['acronym'] + ' ' + "{0:.{1}f}".format(Total_EUR_Day, 2) + ' €\n'
 
     return message
 
