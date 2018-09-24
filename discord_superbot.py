@@ -36,10 +36,10 @@ Client = discord.Client()
 client = commands.Bot(command_prefix = "!")
 
 lista_comandos = {
-  "AYUDA":              "Muestra esta ayuda.",
-  "PRECIO":             "Muestra el precio actual de la moneda.",
-  "BALANCE":            "Muestra el balance actual de todas las cuentas.",
-  "INVERSORES":         "Muestra el balance individual de todos los inversores.",
+  "AYUDA":              "Muestra esta ayuda",
+  "PRECIO":             "Muestra el precio actual de la moneda",
+  "BALANCE":            "Muestra el balance actual de total de cuentas",
+  "INVERSORES":         "Muestra el balance de los inversores",
   "RENDIMIENTO":        "Muestra el rendimiendo actual de los MNs",
 }
 
@@ -80,7 +80,7 @@ def get_balance(address):
 def mostrar_ayuda():
     message="\n+Lista de comandos:\n"
     for comando in sorted(dict.keys(lista_comandos)):
-        message+='*{0:14}'.format(comando)+lista_comandos[comando]+'\n'
+        message+='*{0:14}'.format(comando)+lista_comandos[comando] + '\n'
 
     return message
 
@@ -125,7 +125,7 @@ def mostrar_balance():
     #Ponemos todo en el mensajito de vuelta
     message = '\n+Balance General\n' + \
     Tabla.get_string() + '\n'  \
-    '-Total:  '+"{0:.{1}f}".format(Total_Balance, cfg['COIN']['decimals']) + ' ' + cfg['COIN']['acronym'] + '\n'
+    '-Total: ' + "{0:.{1}f}".format(Total_Balance, cfg['COIN']['decimals']) + ' ' + cfg['COIN']['acronym'] + '\n'
 
     return message
 
@@ -160,7 +160,7 @@ def mostrar_rendimiento():
     #Ponemos todo en el mensajito de vuelta
     message = "\n+Rendimiento MNs\n" + \
     Tabla.get_string()+ '\n'  \
-    '-Total:  '+"{0:.{1}f}".format(Total_Coins_Day, cfg['COIN']['decimals'])+' '+"{0:.{1}f}".format(Total_EUR_Day, 2)  + '\n'
+    '-Total: ' + "{0:.{1}f}".format(Total_Coins_Day, cfg['COIN']['decimals']) + ' ' + cfg['COIN']['acronym'] + "{0:.{1}f}".format(Total_EUR_Day, 2) + '€\n'
 
     return message
 
@@ -195,7 +195,7 @@ def mostrar_inversores():
             inv_total     = float(inv['coins']) + inv_generated
             Tabla.add_row([inv['name'], "{0:.{1}f}".format(inv_percent, 2), "{0:.{1}f}".format(inv_generated, cfg['COIN']['decimals']), "{0:.{1}f}".format(inv_total, cfg['COIN']['decimals'])])
 
-        message += '\n' + Tabla.get_string() + '\n' '-Total Mined:  ' + "{0:.{1}f}".format(MN_Generated, cfg['COIN']['decimals']) + ' ' + cfg['COIN']['acronym'] + '\n'
+        message += '\n' + Tabla.get_string() + '\n' '-Total mined: ' + "{0:.{1}f}".format(MN_Generated, cfg['COIN']['decimals']) + ' ' + cfg['COIN']['acronym'] + '\n'
 
     return message
 
