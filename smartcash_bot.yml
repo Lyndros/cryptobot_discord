@@ -11,6 +11,7 @@ COIN:
     acronym:        SMART
     decimals:       8
     explorer_url:   https://insight.smartcash.cc/api/addr/
+    collateral:     10000
 
 #SECTION FOR MASTERNODES
 MASTERNODES:
@@ -18,6 +19,12 @@ MASTERNODES:
       setup_date:     29/07/2018
       setup_balance:  10096.26363000
       address:        Sdu8FKa3yWNe3wXQv1qGu64XnvT89vprnK
+      #If you have a share masternode and want to show investors information
+      INVESTORS:
+        - name:       INVESTOR_NAME_1
+          coins:      15000
+        - name:       INVESTOR_NAME_1
+          coins:      15000
 
 #SECTION FOR OTHER ADDRESSES SHOWN IN BALANCE WHICH ARE NOT MASTERNODES
 OTHER_ADDRESSES:

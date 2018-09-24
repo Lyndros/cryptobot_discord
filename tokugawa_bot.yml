@@ -11,6 +11,7 @@ COIN:
     acronym:        TOK
     decimals:       6
     explorer_url:   http://explorer.tokugawacoin.com/ext/getaddress/
+    collateral:     2500
 
 #SECTION FOR MASTERNODES
 MASTERNODES:
@@ -18,6 +19,12 @@ MASTERNODES:
       setup_date:     13/09/2018
       setup_balance:  2500
       address:        TbP5rmPKGbKczVo3bR7qDk5z6YVN2N3hJA
+      #Non mandarory if you have a share masternode and want to show investors information
+      INVESTORS:
+        - name:       INVESTOR_NAME_1
+          coins:      1250
+        - name:       INVESTOR_NAME_1
+          coins:      1250
 
     - name:           MN02
       setup_date:     13/09/2018
