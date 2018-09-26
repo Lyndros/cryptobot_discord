@@ -34,7 +34,7 @@
 <br/>
 <br/> <b>4. Optional starting the bot automatically at boot</b>
 <br/> If you want to automatically start yours bots at boot consider to add them to systemctl.
-<br/> You can check the predefine bot services available in: https://github.com/Lyndros/crypto_tools/blob/master/services/.
+<br/> You can check the predefine bot services available in: https://github.com/Lyndros/cryptobot_discord/master/service/.
 <br/>
 <br/> i.e: Adding tokugawa bot service,
 <br/> &nbsp; &nbsp; $cd /etc/systemd/system/
@@ -43,7 +43,7 @@
 <br/> 
 <br/> i.e: Adding smartcash bot service,
 <br/> &nbsp; &nbsp; $cd /etc/systemd/system/
-<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/services/smartcash_bot.service
+<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/service/smartcash_bot.service
 <br/> &nbsp; &nbsp; $systemctl enable smartcash_bot.service
 <br/>
 <br/> <b>5. Chatting withs your bot</b>
