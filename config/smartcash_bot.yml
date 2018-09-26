@@ -4,6 +4,11 @@
 # > ethereum address: 0x44F102616C8e19fF3FED10c0b05B3d23595211ce  #
 # > tokugawa address: TjrQBaaCPoVW9mPAZHPfVx9JJCq7yZ7QnA          #
 ###################################################################
+#SECTION FOR BOT STYLE PARAMETERS
+STYLE:
+  FRAME:
+    default_color:  0x00ffff
+    error_color:    0xff0000
 
 #SECTION FOR COIN SPECIFIC PARAMETERS
 COIN:

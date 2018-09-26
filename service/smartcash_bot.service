@@ -8,7 +8,7 @@ Type=simple
 WorkingDirectory=/opt/discord_bots/
 Restart=always
 RestartSec=10
-ExecStart=/opt/discord_bots/discord_superbot.py /opt/discord_bots/smartcash_bot.yml
+ExecStart=/opt/discord_bots/cryptobot_discord.py /opt/discord_bots/smartcash_bot.yml
 
 [Install]
 WantedBy=multi-user.target

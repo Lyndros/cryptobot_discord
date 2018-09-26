@@ -1,5 +1,5 @@
 [Unit]
-Description=Tokugawa Bot
+Description=Loki Bot
 After=network-online.target
 
 [Service]

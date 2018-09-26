@@ -10,8 +10,7 @@
 <br/> In order to run this program the following python3 and the following libraries need to be installed:
 <br/> &nbsp; &nbsp; $sudo apt-get install python3-pip python3-yaml
 <br/> &nbsp; &nbsp; $sudo pip3 install -U discord.py
-<br/> &nbsp; &nbsp; $sudo pip3 install coinmarketcap==4.2.1
-<br/> &nbsp; &nbsp; $sudo pip3 install PrettyTable
+<br/> &nbsp; &nbsp; $sudo pip3 install coinmarketcap
 <br/>
 <br/> <b>1. Copying the necessary files</b>
 <br/>
@@ -22,6 +21,7 @@
 <br/> -- These are configuration examples, you need to customize them --
 <br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/config/smartcash_bot.yml
 <br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/config/tokugawa_bot.yml
+<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/config/loki_bot.yml
 <br/>
 <br/> <b>2. Setting your configuration file</b>
 <br/> 
@@ -35,6 +35,7 @@
 <br/> <b>4. Optional starting the bot automatically at boot</b>
 <br/> If you want to automatically start yours bots at boot consider to add them to systemctl.
 <br/> You can check the predefine bot services available in: https://github.com/Lyndros/cryptobot_discord/tree/master/service/.
+<br/> Please before enabling edit the file location as needed.
 <br/>
 <br/> i.e: Adding tokugawa bot service,
 <br/> &nbsp; &nbsp; $cd /etc/systemd/system/
@@ -45,6 +46,11 @@
 <br/> &nbsp; &nbsp; $cd /etc/systemd/system/
 <br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/service/smartcash_bot.service
 <br/> &nbsp; &nbsp; $systemctl enable smartcash_bot.service
+<br/>
+<br/> i.e: Adding loki bot service,
+<br/> &nbsp; &nbsp; $cd /etc/systemd/system/
+<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/service/loki_bot.service
+<br/> &nbsp; &nbsp; $systemctl enable loki_bot.service
 <br/>
 <br/> <b>5. Chatting withs your bot</b>
 <br/> To see a list of available bot commands, open a chat with your bot and type "/bot ayuda"
