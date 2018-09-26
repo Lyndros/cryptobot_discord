@@ -1,6 +1,6 @@
 <html>
 <body style="font-family: Consolas, monospace; font-size:14pt;">
-<b>Discord BOT Installation instructions</b>
+<b>Discord Discord Installation instructions</b>
 <br/> ────────────────────────────────────────────────────
 <br/>
 <br/> A beautiful discord bot that allows you to track your favourite masternodes balances and performances.
@@ -15,13 +15,13 @@
 <br/>
 <br/> <b>1. Copying the necessary files</b>
 <br/>
-<br/> &nbsp; &nbsp; $mkdir -p /opt/discord_bots/
-<br/> &nbsp; &nbsp; $cd /opt/discord_bots/
-<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/crypto_tools/master/discord_bots/discord_superbot.py
+<br/> &nbsp; &nbsp; $mkdir -p /opt/cryptobot_discord/
+<br/> &nbsp; &nbsp; $cd /opt/cryptobot_discord/
+<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/cryptobot_discord.py
 <br/>
 <br/> -- These are configuration examples, you need to customize them --
-<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/crypto_tools/master/discord_bots/smartcash_bot.yml
-<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/crypto_tools/master/discord_bots/tokugawa_bot.yml
+<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/config/smartcash_bot.yml
+<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/config/tokugawa_bot.yml
 <br/>
 <br/> <b>2. Setting your configuration file</b>
 <br/> 
@@ -30,7 +30,7 @@
 <br/> In the Discord section add your API key (check how to create a key <a href="https://discordpy.readthedocs.io/en/rewrite/discord.html">here</a>).
 <br/>
 <br/> <b>3. Executing the script</b>
-<br/> &nbsp; &nbsp; $python3 discord_bot.py your_configuration.yml &
+<br/> &nbsp; &nbsp; $python3 cryptobot_discord.py /your_path/your_configuration.yml &
 <br/>
 <br/> <b>4. Optional starting the bot automatically at boot</b>
 <br/> If you want to automatically start yours bots at boot consider to add them to systemctl.
@@ -38,12 +38,12 @@
 <br/>
 <br/> i.e: Adding tokugawa bot service,
 <br/> &nbsp; &nbsp; $cd /etc/systemd/system/
-<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/crypto_tools/master/services/tokugawa_bot.service
+<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/service/tokugawa_bot.service
 <br/> &nbsp; &nbsp; $systemctl enable tokugawa_bot.service
 <br/> 
 <br/> i.e: Adding smartcash bot service,
 <br/> &nbsp; &nbsp; $cd /etc/systemd/system/
-<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/crypto_tools/master/services/smartcash_bot.service
+<br/> &nbsp; &nbsp; $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/services/smartcash_bot.service
 <br/> &nbsp; &nbsp; $systemctl enable smartcash_bot.service
 <br/>
 <br/> <b>5. Chatting withs your bot</b>

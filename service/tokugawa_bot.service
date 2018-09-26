@@ -1,0 +1,14 @@
+[Unit]
+Description=Tokugawa Bot
+After=network-online.target
+
+[Service]
+User=bot
+Type=simple
+WorkingDirectory=/opt/discord_bots/
+Restart=always
+RestartSec=10
+ExecStart=/opt/discord_bots/discord_superbot.py /opt/discord_bots/tokugawa_bot.yml
+
+[Install]
+WantedBy=multi-user.target
