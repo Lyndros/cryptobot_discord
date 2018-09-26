@@ -34,7 +34,7 @@
 <br/>
 <br/> <b>4. Optional starting the bot automatically at boot</b>
 <br/> If you want to automatically start yours bots at boot consider to add them to systemctl.
-<br/> You can check the predefine bot services available in: https://github.com/Lyndros/cryptobot_discord/master/service/.
+<br/> You can check the predefine bot services available in: https://github.com/Lyndros/cryptobot_discord/tree/master/service/.
 <br/>
 <br/> i.e: Adding tokugawa bot service,
 <br/> &nbsp; &nbsp; $cd /etc/systemd/system/
