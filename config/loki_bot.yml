@@ -18,7 +18,7 @@ MASTERNODES:
     - name:           SN01
       setup_date:     20/09/2018
       setup_balance:  45005                         #Indicate start balance was higher than collateral
-      address:        YOUR_MASTERNODE_ADDRESS
+      address:        YOUR_MASTERNODE_ADDRESS_1
       INVESTORS:
         - name:       INVESTOR_NAME_1
           coins:      15000

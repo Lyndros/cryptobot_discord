@@ -18,7 +18,7 @@ MASTERNODES:
     - name:           MN01
       setup_date:     29/07/2018
       setup_balance:  10096.26363000
-      address:        Sdu8FKa3yWNe3wXQv1qGu64XnvT89vprnK
+      address:        YOUR_MASTERNODE_ADDRESS_1
       #If you have a share masternode and want to show investors information
       INVESTORS:
         - name:       INVESTOR_NAME_1
@@ -29,8 +29,8 @@ MASTERNODES:
 #SECTION FOR OTHER ADDRESSES SHOWN IN BALANCE WHICH ARE NOT MASTERNODES
 OTHER_ADDRESSES:
     - name:           PERS
-      address:        SMqCeDfuxWQD2MgTYzdoN7ijkfKGtZvEUZ
+      address:        YOUR_PERSONAL_ADDRESS_1
 
 #SECTION FOR DISCORD PARAMETERS
 DISCORD:
-    api_key:          123456789example
+    api_key:          YOUR_DISCORD_API_KEY
