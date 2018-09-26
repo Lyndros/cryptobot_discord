@@ -1,6 +1,6 @@
 <html>
 <body style="font-family: Consolas, monospace; font-size:14pt;">
-<b>Discord Discord Installation instructions</b>
+<b>Discord CryptoBot installation instructions</b>
 <br/> ────────────────────────────────────────────────────
 <br/>
 <br/> A beautiful discord bot that allows you to track your favourite masternodes balances and performances.
