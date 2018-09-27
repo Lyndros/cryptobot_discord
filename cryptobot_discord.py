@@ -20,25 +20,43 @@ from urllib.request         import urlopen
 from discord.ext.commands   import Bot
 from discord.ext            import commands
 from datetime               import datetime
+from prettytable            import PrettyTable
 
-def justify_words(string):
-    #Define separation width and char
-    SepWidth = 15
+def justify_text_fix (string, width=None):
+    #Define default separation to 10 if width
+    SepWidth = 10 if (width==None) else width
     SepChar  = ' '
 
     #Initialise returning string
-    new_string = ''
+    new_string = '\n'
 
-    #Init the word number
-    word_number=0
-    total_words = len(string.split())
-
-    for word in string.split():
-        word_number+=1
-        if word_number == total_words:
-            new_string+=word
-        else:
+    for line in string.splitlines():
+        for word in line.split():
             new_string+=word.ljust(SepWidth,SepChar)
+
+        new_string += '\n'
+
+    #print("Justified fix(%s): %s" %(SepWidth, new_string))
+
+    return new_string
+
+def justify_text_dyn (string):
+    #Define minimun separation between fields
+    min_separation=2
+
+    #Init the maximum word lenght
+    max_word_width=0
+    for word in string.split():
+        if len(word) > max_word_width:
+            max_word_width = len(word)
+
+    #Define the separation
+    total_separation = max_word_width+min_separation
+
+    #Get the text justified with the proper separation
+    new_string = justify_text_fix(string, width=total_separation)
+
+    #print("Justified dyn(%s): %s" %(total_separation, new_string))
 
     return new_string
 
@@ -114,7 +132,6 @@ def mostrar_precio():
     embed       = discord.Embed()
     embed.color = CONFIG['STYLE']['FRAME']['default_color']
     embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
-
     embed.title = "**__PRECIO DE %s (%s)__**" %(CONFIG['COIN']['name'].upper(), CONFIG['COIN']['acronym'].upper())
     embed.url   = 'https://coinmarketcap.com/currencies/' + CONFIG['COIN']['name'] + '/'
 
@@ -132,7 +149,7 @@ def mostrar_precio():
                             "\n**Cambio 24h**:     " + str(coin_stats['data']['quotes']['EUR']['percent_change_24h']) + \
                             "\n**Cambio 7d **:     " + str(coin_stats['data']['quotes']['EUR']['percent_change_7d']) + "%"
 
-        embed.set_footer(text="coinmarketcap @%s" %coin_stats['metadata']['timestamp'])
+        embed.set_footer(text="coinmarketcap @%s" %coin_stats['metadata']['timestamp'], icon_url="https://logo.clearbit.com/coinmarketcap.com")
 
     except:
         embed.color = CONFIG['STYLE']['FRAME']['error_color']
@@ -144,7 +161,7 @@ def mostrar_balance():
     #Declare embed object
     embed       = discord.Embed()
     embed.color = CONFIG['STYLE']['FRAME']['default_color']
-    embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
+    #embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
 
     embed.title = "**__BALANCE__**"
 
@@ -163,10 +180,6 @@ def mostrar_balance():
         #This is working
         embed.description += mn['name'] + " {0:.{1}f}".format(MN_Current_Coins, CONFIG['COIN']['decimals']) + '\n'
 
-        #Not working in mobile :-(
-        #embed.add_field(name=mn['name'], value="\a", inline=True)
-        #embed.add_field(name="{0:.{1}f}".format(MN_Current_Coins, CONFIG['COIN']['decimals']), value="\a", inline=True)
-
     #Get balance for other addresses
     my_addresses = CONFIG['OTHER_ADDRESSES'] if ('OTHER_ADDRESSES' in CONFIG.keys()) else [];
     for oaddr in my_addresses:
@@ -176,16 +189,10 @@ def mostrar_balance():
         #This is working
         embed.description += oaddr['name'] + " {0:.{1}f}".format(OADDR_Current_Coins, CONFIG['COIN']['decimals']) + '\n'
 
-        #Not working in mobile :-(
-        #embed.add_field(name=oaddr['name'], value="\a", inline=True)
-        #embed.add_field(name="{0:.{1}f}".format(OADDR_Current_Coins, CONFIG['COIN']['decimals']), value="\a", inline=True)
-
-    # Not working in mobile :-(
-    #embed.add_field(name="TOTAL", value="\a", inline=True)
-    #embed.add_field(name="{0:.{1}f}".format(Total_Balance, CONFIG['COIN']['decimals']) + ' ' + CONFIG['COIN']['acronym'], value="\a", inline=True)
-
     #End the description
-    embed.description +='\n**TOTAL:** ' + "{0:.{1}f}".format(Total_Balance, CONFIG['COIN']['decimals']) + ' ' + CONFIG['COIN']['acronym']
+    embed.description +='TOTAL: ' + "{0:.{1}f}".format(Total_Balance, CONFIG['COIN']['decimals']) + ' ' + CONFIG['COIN']['acronym']
+
+    embed.description = '```'+justify_text_dyn(embed.description)+'```'
 
     return embed
 
@@ -193,7 +200,7 @@ def mostrar_rendimiento():
     #Declare embed object
     embed       = discord.Embed()
     embed.color = CONFIG['STYLE']['FRAME']['default_color']
-    embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
+    #embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
 
     embed.title = "**__RENDIMIENTO MNs__**"
 
@@ -205,7 +212,7 @@ def mostrar_rendimiento():
     Total_Coins_Day = 0.0
 
     #Init the description message
-    embed.description=""
+    embed.description= "MN " + CONFIG['COIN']['acronym']+"/Dia €/Dia\n"
 
     #Get balance for all nodes
     my_addresses = CONFIG['MASTERNODES'] if ('MASTERNODES' in CONFIG.keys()) else [];
@@ -216,12 +223,15 @@ def mostrar_rendimiento():
         MN_Running_Days  = get_running_days(MN_Init_Date)+1
         MN_Coins_Day     = round((MN_Current_Coins-MN_Initial_Coins)/MN_Running_Days, CONFIG['COIN']['decimals'])
         MN_EUR_Day       = round(MN_Coins_Day*float(coin_stats["data"]['quotes']["EUR"]["price"]), CONFIG['COIN']['decimals'])
-        embed.description += "**"+mn['name']+"**" + " {0:.{1}f}".format(MN_Coins_Day, CONFIG['COIN']['decimals']) + " {0:.{1}f}".format(MN_EUR_Day, 2) + ' \n'
+        embed.description += mn['name'] + " {0:.{1}f}".format(MN_Coins_Day, CONFIG['COIN']['decimals']) + " {0:.{1}f}".format(MN_EUR_Day, 2) + '\n'
+
         Total_EUR_Day    += MN_EUR_Day
         Total_Coins_Day  += MN_Coins_Day
 
     #End the description
-    embed.description += '\n**TOTAL:** ' + "{0:.{1}f}".format(Total_Coins_Day, CONFIG['COIN']['decimals']) + ' ' + CONFIG['COIN']['acronym'] + ' ' + "{0:.{1}f}".format(Total_EUR_Day, 2) + ' €\n'
+    embed.description += 'TOTAL: ' + "{0:.{1}f}".format(Total_Coins_Day, CONFIG['COIN']['decimals']) + ' ' + "{0:.{1}f}".format(Total_EUR_Day, 2) + '\n'
+
+    embed.description = '```'+justify_text_dyn(embed.description)+'```'
 
     return embed
 
@@ -229,7 +239,7 @@ def mostrar_inversores():
     # Declare embed object
     embed       = discord.Embed()
     embed.color = CONFIG['STYLE']['FRAME']['default_color']
-    embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
+    #embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
 
     embed.title = "**__INVERSORES__**"
 
@@ -248,8 +258,13 @@ def mostrar_inversores():
         # Get inverstors for current masternode
         my_investors = mn['INVESTORS'] if ('INVESTORS' in mn.keys()) else [];
 
-        embed.description+="\n"+ mn['name'] +" (%) Mined Total"
-        embed.description+="\n-----------------------------------------------------"
+        embed.description+= mn['name'] + '\n'
+        embed.description+= "Nombre(%) Generado Total\n"
+
+        # Construimos la dichosa tablita
+        #Tabla = PrettyTable()
+        #Tabla.padding_width = 0
+        #Tabla.field_names = ['Nombre', '(%)', 'Mined', 'Deposito+Mined']
 
         #Loop through all investors for current MN
         for inv in my_investors:
@@ -258,20 +273,21 @@ def mostrar_inversores():
             inv_total     = float(inv['coins']) + inv_generated
 
             #Dump investor information
-            embed.description+= "\n" + inv['name'] + " {0:.{1}f}%".format(inv_percent, 2) + " {0:.{1}f}".format(inv_generated, CONFIG['COIN']['decimals']) + " {0:.{1}f}".format(inv_total, CONFIG['COIN']['decimals'])
+            embed.description+= inv['name'] + "({0:.{1}f}%)".format(inv_percent, 0) + " {0:.{1}f}".format(inv_generated, CONFIG['COIN']['decimals']) + " {0:.{1}f}".format(inv_total, CONFIG['COIN']['decimals']) + '\n'
 
-            # Not working in mobile :-(
-            #embed.add_field(name=inv['name'],                         value="{0:.{1}f}".format(inv_generated, CONFIG['COIN']['decimals']), inline=True)
-            #embed.add_field(name="{0:.{1}f}%".format(inv_percent, 2), value="{0:.{1}f}".format(inv_total, CONFIG['COIN']['decimals']),     inline=True)
-
-        #field_header = justify_words(str(mn['name'])+" (%) Mined Total")
+            #Tabla.add_row([inv['name'], "{0:.{1}f}".format(inv_percent, 2),
+            #              "{0:.{1}f}".format(inv_generated, CONFIG['COIN']['decimals']),
+            #               "{0:.{1}f}".format(inv_total, CONFIG['COIN']['decimals'])])
 
         Total_Mined += MN_Generated
 
-        #New line between MNs
-        embed.description += "\n"
+        #Separate MASTERNODEs
+        embed.description += '\n'
+        #embed.description += '\n'+ Tabla.get_string() + '\n'
 
-    embed.set_footer(text='Total mined: ' + "{0:.{1}f}".format(Total_Mined, CONFIG['COIN']['decimals']) + ' ' + CONFIG['COIN']['acronym'])
+    embed.description = '```' + justify_text_dyn(embed.description) + '```'
+
+    #embed.set_footer(text='Total mined: ' + "{0:.{1}f}".format(Total_Mined, CONFIG['COIN']['decimals']) + ' ' + CONFIG['COIN']['acronym'])
 
     return embed
 
@@ -303,6 +319,9 @@ LISTA_COMANDOS = {
   "INVERSORES":         "Muestra el balance de los inversores",
   "RENDIMIENTO":        "Muestra el rendimiendo actual de los MNs",
 }
+
+#Tested in iPhone 6S this is the maximum length per string
+MAX_MOBILE_STRLEN = 43
 
 #Parse program parameters
 parser = argparse.ArgumentParser()
