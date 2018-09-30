@@ -31,6 +31,10 @@ MASTERNODES:
           coins:      15000
         - name:       INVESTOR_NAME_1
           coins:      15000
+      EXPENSES:
+        - description: EXPENSE_DESCRIPTION_1
+          coins:       EXPENSE_COST1_LOK
+        operator:      OPERATOR_FEE_PERCENTAGE      # 0.01.. (1 percent) etc
 
 #SECTION FOR DISCORD PARAMETERS
 DISCORD:
