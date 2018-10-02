@@ -33,9 +33,10 @@ $python3 cryptobot_discord.py /your_path/your_configuration.yml &
 ```
 
 ## 5. Optional starting the bot automatically at boot
-If you want to automatically start yours bots at boot consider to add them to systemctl.
-You can check the predefine bot services available in: https://github.com/Lyndros/cryptobot_discord/tree/master/service/.
-Please before enabling edit the file location as needed.
+If you want to automatically start your bot at boot consider to add them to systemctl.
+You can check some predefine bot services available in: https://github.com/Lyndros/cryptobot_discord/tree/master/service/.
+
+Please before enabling edit the file as needed, to update the location, user, etc..
 
 i.e: Adding tokugawa bot service,
 ```
@@ -56,8 +57,9 @@ $wget https://raw.githubusercontent.com/Lyndros/cryptobot_discord/master/service
 $systemctl enable loki_bot.service
 ```
 
-## 6. Chatting withs your bot
-To see a list of available bot commands, open a chat with your bot and type "/bot ayuda"
+## 6. Chatting with your bot
+In order to chat with your bot just open a chat or a channel where your bot is present and type 
+"/bot ayuda" in order to see the available commands.
 
 ## 7. Donations
 If you want o support this repository I accept donations even 1 TOK is always welcome :-)!
