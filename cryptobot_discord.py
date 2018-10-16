@@ -69,6 +69,12 @@ def get_running_days(date_epoch):
 
     return delta.days
 
+def convert_timestamp(timestamp):
+
+    date_stamp = datetime.fromtimestamp(timestamp).strftime('%d-%m-%Y %H:%M')
+
+    return date_stamp
+
 def get_balance(address):
     #Read balance from local file
     if CONFIG['COIN']['explorer_url'][0:7]=='file://':
@@ -149,7 +155,7 @@ def mostrar_precio():
                             "\n**Cambio 24h**:     " + str(coin_stats['data']['quotes']['EUR']['percent_change_24h']) + \
                             "\n**Cambio 7d **:     " + str(coin_stats['data']['quotes']['EUR']['percent_change_7d']) + "%"
 
-        embed.set_footer(text="coinmarketcap @%s" %coin_stats['metadata']['timestamp'], icon_url="https://logo.clearbit.com/coinmarketcap.com")
+        embed.set_footer(text="coinmarketcap @%s" %convert_timestamp(coin_stats['metadata']['timestamp']), icon_url="https://logo.clearbit.com/coinmarketcap.com")
 
     except:
         embed.color = CONFIG['STYLE']['FRAME']['error_color']
