@@ -82,11 +82,7 @@ def get_balance(address):
             for line in balance_file:
                 wallet_address, balance = line.split()
                 if wallet_address==address:
-                    #LOKI PATCH WE NEED TO REDUCE COLLATERAL
-                    if CONFIG['COIN']['acronym'] == 'LOKI':
-                        return round(float(balance)-float(CONFIG['COIN']['collateral']),CONFIG['COIN']['decimals'])
-                    else:
-                        return round(float(balance), CONFIG['COIN']['decimals'])
+                    return round(float(balance), CONFIG['COIN']['decimals'])
 
     #Get value from explorer
     else:
