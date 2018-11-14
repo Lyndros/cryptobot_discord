@@ -90,8 +90,12 @@ def get_balance(address):
         req = requests.get(url)
         status_code = req.status_code
         if status_code == 200:
-            #Limit to decimals
-            return round(float(json.loads(req.text)['balance']),CONFIG['COIN']['decimals'])
+            #Note when an address did not received any coins is not existing yet in the blockchain
+            try:
+                #Limit to decimals
+                return round(float(json.loads(req.text)['balance']),CONFIG['COIN']['decimals'])
+            except:
+                return 0
 
     #Return none if not found
     return None
