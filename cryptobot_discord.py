@@ -302,7 +302,8 @@ def mostrar_inversores():
         Total_Mined += MN_Total_Mined
 
         embed.description += '\n'
-        embed.description += "Gastos:" + " {0:.{1}f}".format(MN_Total_Expenses, 1) + " (%s%%)" %(int(mn['operator']*100)) + '\n'
+        embed.description += "Minado:  " + " {0:.{1}f}".format(MN_Total_Mined, 1) + '\n'
+        embed.description += "Gastos:  " + " {0:.{1}f}".format(MN_Total_Expenses, 1) + " (%s%%)" %(int(mn['operator']*100)) + '\n'
         embed.description += "Generado:" + " {0:.{1}f}".format(MN_Generated, 1) + '\n'
 
         # Separate MASTERNODEs
