@@ -24,12 +24,19 @@ MASTERNODES:
       setup_date:     29/07/2018
       setup_balance:  10096.26363000
       address:        YOUR_MASTERNODE_ADDRESS_1
+      operator_fee:   OPERATOR_FEE_PERCENTAGE       #0.01.. (1 percent) etc
+
       #If you have a share masternode and want to show investors information
       INVESTORS:
         - name:       INVESTOR_NAME_1
           coins:      5000
         - name:       INVESTOR_NAME_1
           coins:      5000
+
+      #ALL RELATED MN EXPENSES ARE IN FIAT
+      EXPENSES:
+        - description: EXPENSE_DESCRIPTION_1
+          coins:       EXPENSE_COST1
 
 #SECTION FOR OTHER ADDRESSES SHOWN IN BALANCE WHICH ARE NOT MASTERNODES
 OTHER_ADDRESSES:

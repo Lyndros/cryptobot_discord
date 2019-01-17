@@ -24,6 +24,8 @@ MASTERNODES:
       setup_date:     13/09/2018
       setup_balance:  2500
       address:        YOUR_MASTERNODE_ADDRESS_1
+      operator_fee:   OPERATOR_FEE_PERCENTAGE       #0.01.. (1 percent) etc
+
       #Non mandarory if you have a share masternode and want to show investors information
       INVESTORS:
         - name:       INVESTOR_NAME_1
@@ -31,10 +33,17 @@ MASTERNODES:
         - name:       INVESTOR_NAME_1
           coins:      1250
 
+      #ALL RELATED MN EXPENSES ARE IN FIAT
+      EXPENSES:
+        - description: EXPENSE_DESCRIPTION_1
+          coins:       EXPENSE_COST1
+
     - name:           MN02
       setup_date:     13/09/2018
       setup_balance:  2500
       address:        YOUR_MASTERNODE_ADDRESS_2
+      operator_fee:   OPERATOR_FEE_PERCENTAGE       #0.01.. (1 percent) etc
+
       INVESTORS:
         - name:       INVESTOR_NAME_1
           coins:      1000
@@ -43,13 +52,25 @@ MASTERNODES:
         - name:       INVESTOR_NAME_3
           coins:      500
 
+      #ALL RELATED MN EXPENSES ARE IN FIAT
+      EXPENSES:
+        - description: EXPENSE_DESCRIPTION_1
+          coins:       EXPENSE_COST1
+
     - name:           MN03
       setup_date:     13/09/2018
       setup_balance:  2500
       address:        YOUR_MASTERNODE_ADDRESS_3
+      operator_fee:   OPERATOR_FEE_PERCENTAGE       #0.01.. (1 percent) etc
+
       INVESTORS:
         - name:       INVESTOR_NAME_1
           coins:      2500
+
+      #ALL RELATED MN EXPENSES ARE IN FIAT
+      EXPENSES:
+        - description: EXPENSE_DESCRIPTION_1
+          coins:       EXPENSE_COST1
 
 #SECTION FOR OTHER ADDRESSES SHOWN IN BALANCE WHICH ARE NOT MASTERNODES
 OTHER_ADDRESSES:

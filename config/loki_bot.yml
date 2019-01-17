@@ -24,6 +24,8 @@ MASTERNODES:
       setup_date:     20/09/2018
       setup_balance:  45005                         #Indicate start balance was higher than collateral
       address:        YOUR_MASTERNODE_ADDRESS_1
+      operator_fee:   OPERATOR_FEE_PERCENTAGE       #0.01.. (1 percent) etc
+
       INVESTORS:
         - name:       INVESTOR_NAME_1
           coins:      15000
@@ -31,10 +33,11 @@ MASTERNODES:
           coins:      15000
         - name:       INVESTOR_NAME_1
           coins:      15000
+
+      #ALL RELATED MN EXPENSES ARE IN FIAT
       EXPENSES:
         - description: EXPENSE_DESCRIPTION_1
-          coins:       EXPENSE_COST1_LOK
-        operator:      OPERATOR_FEE_PERCENTAGE      # 0.01.. (1 percent) etc
+          coins:       EXPENSE_COST1
 
 #SECTION FOR DISCORD PARAMETERS
 DISCORD:
