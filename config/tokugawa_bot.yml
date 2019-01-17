@@ -55,7 +55,7 @@ MASTERNODES:
       #ALL RELATED MN EXPENSES ARE IN FIAT
       EXPENSES:
         - description: EXPENSE_DESCRIPTION_1
-          coins:       EXPENSE_COST1
+          cost:        EXPENSE_COST1
 
     - name:           MN03
       setup_date:     13/09/2018
@@ -70,7 +70,7 @@ MASTERNODES:
       #ALL RELATED MN EXPENSES ARE IN FIAT
       EXPENSES:
         - description: EXPENSE_DESCRIPTION_1
-          coins:       EXPENSE_COST1
+          cost:        EXPENSE_COST1
 
 #SECTION FOR OTHER ADDRESSES SHOWN IN BALANCE WHICH ARE NOT MASTERNODES
 OTHER_ADDRESSES:

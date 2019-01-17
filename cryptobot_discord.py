@@ -302,12 +302,50 @@ def mostrar_inversores():
 
         embed.description += '\n'
         embed.description += "Minado:   " + " {0:.{1}f}".format(MN_Total_Mined, 1) + '\n'
-        embed.description += "Operador: " + " {0:.{1}f}".format(MN_Total_Mined*mn['operator_fee'], 1) + " (%s%%)" %(int(mn['operator']*100)) + '\n'
+        embed.description += "Operador: " + " {0:.{1}f}".format(MN_Total_Mined*mn['operator_fee'], 1) + " (%s%%)" %(int(mn['operator_fee']*100)) + '\n'
         embed.description += "Generado: " + " {0:.{1}f}".format(MN_Generated, 1) + '\n'
 
         # Separate MASTERNODEs
         embed.description += '\n'
         #embed.description += '\n'+ Tabla.get_string() + '\n'
+
+    embed.description = '```' + justify_text_dyn(embed.description) + '```'
+
+    #embed.set_footer(text='Total mined: ' + "{0:.{1}f}".format(Total_Mined, CONFIG['COIN']['decimals']) + ' ' + CONFIG['COIN']['acronym'])
+
+    return embed
+
+def mostrar_gastos():
+    # Declare embed object
+    embed       = discord.Embed()
+    embed.color = CONFIG['STYLE']['FRAME']['default_color']
+    #embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
+
+    embed.title = "**__GASTOS__**"
+
+    #Init the message description
+    embed.description = ""
+
+    #Get balance for all nodes
+    my_addresses = CONFIG['MASTERNODES'] if ('MASTERNODES' in CONFIG.keys()) else [];
+    for mn in my_addresses:
+        #Init the Total calculated
+        MN_Total_Expenses = 0;
+
+        embed.description+= mn['name'] + '\n'
+        embed.description+= "Descripcion Total/€\n"
+
+        # Get expenses for current masternode
+        my_expenses = mn['EXPENSES'] if ('EXPENSES' in mn.keys()) else [];
+
+        for exp in my_expenses:
+            embed.description+= exp['description'] + " {0:.{1}f}".format(exp['costs'], 1)+'\n'
+
+            #Variable containing to compute the total expenses per masternode
+            MN_Total_Expenses += exp['costs']
+
+        # Separate MASTERNODEs
+        embed.description += '\n'
 
     embed.description = '```' + justify_text_dyn(embed.description) + '```'
 
@@ -342,6 +380,7 @@ LISTA_COMANDOS = {
   "BALANCE":            "Muestra el balance actual total",
   "INVERSORES":         "Muestra el balance de los inversores",
   "RENDIMIENTO":        "Muestra el rendimiendo actual de los MNs",
+  "GASTOS":             "Muestra los gastos detallados por MN"
 }
 
 #Tested in iPhone 6S this is the maximum length per string
