@@ -333,7 +333,7 @@ def mostrar_gastos():
         MN_Total_Expenses = 0;
 
         embed.description+= mn['name'] + '\n'
-        embed.description+= "Descripcion Total/€\n"
+        embed.description+= "DESC TOTAL/€\n"
 
         # Get expenses for current masternode
         my_expenses = mn['EXPENSES'] if ('EXPENSES' in mn.keys()) else [];
@@ -343,6 +343,9 @@ def mostrar_gastos():
 
             #Variable containing to compute the total expenses per masternode
             MN_Total_Expenses += exp['cost']
+
+        # End the description
+        embed.description += 'TOTAL: ' + "{0:.{1}f}".format(MN_Total_Expenses, 1) + ' ' + "€\n"
 
         # Separate MASTERNODEs
         embed.description += '\n'
@@ -364,7 +367,7 @@ def comando_bot(cmd):
         embed_message = mostrar_inversores()
     elif (cmd == "RENDIMIENTO"):
         embed_message = mostrar_rendimiento()
-    elif (cmd == "RENDIMIENTO"):
+    elif (cmd == "GASTOS"):
         embed_message = mostrar_gastos()
     else:
         # Declare embed object
