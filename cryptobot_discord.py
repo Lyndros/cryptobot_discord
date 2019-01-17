@@ -363,7 +363,9 @@ def comando_bot(cmd):
     elif (cmd == "INVERSORES"):
         embed_message = mostrar_inversores()
     elif (cmd == "RENDIMIENTO"):
-        embed_message =  mostrar_rendimiento()
+        embed_message = mostrar_rendimiento()
+    elif (cmd == "RENDIMIENTO"):
+        embed_message = mostrar_gastos()
     else:
         # Declare embed object
         embed_message       = discord.Embed()
