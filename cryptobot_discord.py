@@ -301,9 +301,9 @@ def mostrar_inversores():
         Total_Mined += MN_Total_Mined
 
         embed.description += '\n'
-        embed.description += "Minado:   " + " {0:.{1}f}".format(MN_Total_Mined, 1) + '\n'
-        embed.description += "Operador: " + " {0:.{1}f}".format(MN_Total_Mined*mn['operator_fee'], 1) + " (%s%%)" %(int(mn['operator_fee']*100)) + '\n'
-        embed.description += "Generado: " + " {0:.{1}f}".format(MN_Generated, 1) + '\n'
+        embed.description += "Minado:   " + " {0:.{1}f}".format(MN_Total_Mined, 2) + '\n'
+        embed.description += "Operador: " + " {0:.{1}f}".format(MN_Total_Mined*mn['operator_fee'], 2) + " (%s%%)" %(int(mn['operator_fee']*100)) + '\n'
+        embed.description += "Generado: " + " {0:.{1}f}".format(MN_Generated, 2) + '\n'
 
         # Separate MASTERNODEs
         embed.description += '\n'
@@ -333,7 +333,7 @@ def mostrar_gastos():
         MN_Total_Expenses = 0;
 
         embed.description+= mn['name'] + '\n'
-        embed.description+= "DESC TOTAL/€\n"
+        embed.description+= "DESC COSTE\n"
 
         # Get expenses for current masternode
         my_expenses = mn['EXPENSES'] if ('EXPENSES' in mn.keys()) else [];
@@ -345,7 +345,7 @@ def mostrar_gastos():
             MN_Total_Expenses += exp['cost']
 
         # End the description
-        embed.description += 'TOTAL: ' + "{0:.{1}f}".format(MN_Total_Expenses, 1) + ' ' + "€\n"
+        embed.description += 'TOTAL: ' + "{0:.{1}f}".format(MN_Total_Expenses, 2) + ' ' + "€\n"
 
         # Separate MASTERNODEs
         embed.description += '\n'
