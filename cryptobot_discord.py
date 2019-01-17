@@ -339,7 +339,7 @@ def mostrar_gastos():
         my_expenses = mn['EXPENSES'] if ('EXPENSES' in mn.keys()) else [];
 
         for exp in my_expenses:
-            embed.description+= exp['desc'] + " {0:.{1}f}".format(exp['cost'], 1)+'\n'
+            embed.description+= exp['desc'] + " {0:.{1}f}".format(exp['cost'], 2)+'\n'
 
             #Variable containing to compute the total expenses per masternode
             MN_Total_Expenses += exp['cost']
