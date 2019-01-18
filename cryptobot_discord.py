@@ -349,7 +349,7 @@ def mostrar_gastos():
             MN_Total_Expenses += exp['cost']
 
         # End the description
-        embed.description += 'TOTAL: ' + "{0:.{1}f}".format(MN_Total_Expenses, 2) + ' ' + "€\n"
+        embed.description += '\nTOTAL: ' + "{0:.{1}f}".format(MN_Total_Expenses, 2) + ' ' + "€\n"
 
         # Separate MASTERNODEs
         embed.description += '\n'
