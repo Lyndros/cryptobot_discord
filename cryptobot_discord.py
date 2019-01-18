@@ -219,8 +219,12 @@ def mostrar_rendimiento():
     Total_EUR_Day   = 0.0
     Total_Coins_Day = 0.0
 
+    #Titulo
+    embed.description  = "**__MEDIA DIARIA__**\n"
+    embed.description += "============\n"
+
     #Init the description message
-    embed.description= "MN " + CONFIG['COIN']['acronym']+"/Dia €/Dia\n"
+    embed.description= "NODO " + CONFIG['COIN']['acronym']+"/Dia €/Dia\n"
 
     #Get balance for all nodes
     my_addresses = CONFIG['MASTERNODES'] if ('MASTERNODES' in CONFIG.keys()) else [];
