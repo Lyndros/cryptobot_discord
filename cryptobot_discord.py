@@ -176,8 +176,9 @@ def mostrar_balance():
     #Variable para calcular el balance total
     Total_Balance = 0.0
 
-    #Init description
-    embed.description = ""
+    #Init the description message
+    embed.description  = "NODO " + "SALDO\n"
+    embed.description += "---- " + "-----\n"
 
     #Get balance for all nodes
     my_addresses = CONFIG['MASTERNODES'] if ('MASTERNODES' in CONFIG.keys()) else [];
@@ -198,7 +199,7 @@ def mostrar_balance():
         embed.description += oaddr['name'] + " {0:.{1}f}".format(OADDR_Current_Coins, CONFIG['COIN']['decimals']) + '\n'
 
     #End the description
-    embed.description +='TOTAL: ' + "{0:.{1}f}".format(Total_Balance, CONFIG['COIN']['decimals']) + ' ' + CONFIG['COIN']['acronym']
+    embed.description +='\nTOTAL: ' + "{0:.{1}f}".format(Total_Balance, CONFIG['COIN']['decimals']) + ' ' + CONFIG['COIN']['acronym']
 
     embed.description = '```'+justify_text_dyn(embed.description)+'```'
 
@@ -219,12 +220,9 @@ def mostrar_rendimiento():
     Total_EUR_Day   = 0.0
     Total_Coins_Day = 0.0
 
-    #Titulo
-    embed.description  = "**__MEDIA DIARIA__**\n"
-    embed.description += "============\n"
-
     #Init the description message
-    embed.description= "NODO " + CONFIG['COIN']['acronym']+"/Dia €/Dia\n"
+    embed.description  = "NODO " + CONFIG['COIN']['acronym']+"/Dia €/Dia\n"
+    embed.description += "---- " + "------- " +"-----\n"
 
     #Get balance for all nodes
     my_addresses = CONFIG['MASTERNODES'] if ('MASTERNODES' in CONFIG.keys()) else [];
@@ -241,7 +239,7 @@ def mostrar_rendimiento():
         Total_Coins_Day  += MN_Coins_Day
 
     #End the description
-    embed.description += 'TOTAL: ' + "{0:.{1}f}".format(Total_Coins_Day, CONFIG['COIN']['decimals']) + ' ' + "{0:.{1}f}".format(Total_EUR_Day, 2) + '\n'
+    embed.description += '\nTOTAL: ' + "{0:.{1}f}".format(Total_Coins_Day, CONFIG['COIN']['decimals']) + ' ' + "{0:.{1}f}".format(Total_EUR_Day, 2) + '\n'
 
     embed.description = '```'+justify_text_dyn(embed.description)+'```'
 
@@ -269,8 +267,9 @@ def mostrar_inversores():
 
         embed.description+= mn['name'] + '\n'
         embed.description+= "Nombre(%) Generado Total\n"
+        embed.description+= "--------- -------- -----\n"
 
-        # Construimos la dichosa tablita
+        #Construimos la dichosa tablita
         #Tabla = PrettyTable()
         #Tabla.padding_width = 0
         #Tabla.field_names = ['Nombre', '(%)', 'Mined', 'Deposito+Mined']
