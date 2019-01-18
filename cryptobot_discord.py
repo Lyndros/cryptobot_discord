@@ -171,7 +171,7 @@ def mostrar_balance():
     embed.color = CONFIG['STYLE']['FRAME']['default_color']
     #embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
 
-    embed.title = "**__BALANCE__**"
+    embed.title = "**__BALANCE MNs__**"
 
     #Variable para calcular el balance total
     Total_Balance = 0.0
@@ -251,7 +251,7 @@ def mostrar_inversores():
     embed.color = CONFIG['STYLE']['FRAME']['default_color']
     #embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
 
-    embed.title = "**__INVERSORES__**"
+    embed.title = "**__INVERSORES MNs__**"
 
     #Variable para calcular el total minado
     Total_Mined = 0.0
@@ -318,13 +318,13 @@ def mostrar_inversores():
 
     return embed
 
-def mostrar_gastos():
+def mostrar_coste():
     # Declare embed object
     embed       = discord.Embed()
     embed.color = CONFIG['STYLE']['FRAME']['default_color']
     #embed.set_thumbnail(url='https://s2.coinmarketcap.com/static/img/coins/32x32/%s' %CONFIG['COIN']['id']  + '.png')
 
-    embed.title = "**__GASTOS__**"
+    embed.title = "**__COSTE MNs__**"
 
     #Init the message description
     embed.description = ""
@@ -371,8 +371,8 @@ def comando_bot(cmd):
         embed_message = mostrar_inversores()
     elif (cmd == "RENDIMIENTO"):
         embed_message = mostrar_rendimiento()
-    elif (cmd == "GASTOS"):
-        embed_message = mostrar_gastos()
+    elif (cmd == "COSTE"):
+        embed_message = mostrar_coste()
     else:
         # Declare embed object
         embed_message       = discord.Embed()
@@ -388,8 +388,8 @@ LISTA_COMANDOS = {
   "PRECIO":             "Muestra el precio actual de la moneda",
   "BALANCE":            "Muestra el balance actual total",
   "INVERSORES":         "Muestra el balance de los inversores",
-  "RENDIMIENTO":        "Muestra el rendimiendo actual de los MNs",
-  "GASTOS":             "Muestra los gastos detallados por MN"
+  "RENDIMIENTO":        "Muestra el rendimiendo diario de los MNs",
+  "COSTE":              "Muestra el coste detallados por MN"
 }
 
 #Tested in iPhone 6S this is the maximum length per string
