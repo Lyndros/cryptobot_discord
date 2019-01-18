@@ -337,6 +337,7 @@ def mostrar_gastos():
 
         embed.description+= mn['name'] + '\n'
         embed.description+= "DESC COSTE\n"
+        embed.description+= "---- -----\n"
 
         # Get expenses for current masternode
         my_expenses = mn['EXPENSES'] if ('EXPENSES' in mn.keys()) else [];
