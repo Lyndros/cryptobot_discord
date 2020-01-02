@@ -16,6 +16,8 @@ COIN:
     acronym:        SMART
     decimals:       8
     explorer_url:   https://insight.smartcash.cc/api/addr/
+    json_field:     balance
+    multiplier:     1
     collateral:     10000
 
 #SECTION FOR MASTERNODES

@@ -16,6 +16,8 @@ COIN:
     acronym:        LOKI
     decimals:       10
     explorer_url:   file:///tmp/loki_balance.txt
+    json_field:     none
+    multiplier:     1
     collateral:     45000
 
 #SECTION FOR MASTERNODES

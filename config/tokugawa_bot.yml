@@ -16,6 +16,8 @@ COIN:
     acronym:        TOK
     decimals:       6
     explorer_url:   http://explorer.tokugawacoin.com/ext/getaddress/
+    json_field:     balance
+    multiplier:     1
     collateral:     2500
 
 #SECTION FOR MASTERNODES
