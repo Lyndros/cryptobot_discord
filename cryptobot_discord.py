@@ -419,5 +419,4 @@ async def on_message(message):
     if (message.content.upper()[0:5]=="/BOT "):
         embed_message = comando_bot(message.content.upper()[5:])
         await message.channel.send(embed=embed_message)
-        #client.send_message(message.channel, embed=embed_message)
 client.run(CONFIG['DISCORD']['api_key'])
