@@ -87,13 +87,13 @@ def get_balance(address, json_field, multiplier):
     #Get value from explorer
     else:
         url = CONFIG['COIN']['explorer_url'] + address
-        req = requests.get(url)
+        req = requests.get(url,verify=False)
         status_code = req.status_code
         if status_code == 200:
             #Note when an address did not received any coins is not existing yet in the blockchain
             try:
                 #Limit to decimals
-                return round(float(json.loads(req.text)['json_field'])*multiplier,CONFIG['COIN']['decimals'])
+                return round(float(json.loads(req.text)[CONFIG['COIN']['json_field']])*multiplier,CONFIG['COIN']['decimals'])
             except:
                 return 0
 
@@ -183,7 +183,7 @@ def mostrar_balance():
     #Get balance for all nodes
     my_addresses = CONFIG['MASTERNODES'] if ('MASTERNODES' in CONFIG.keys()) else [];
     for mn in my_addresses:
-        MN_Current_Coins = get_balance(mn['address'],CONFIG['COIN'][json_field],CONFIG['COIN']['multiplier'])
+        MN_Current_Coins = get_balance(mn['address'],CONFIG['COIN']['json_field'],CONFIG['COIN']['multiplier'])
         Total_Balance += MN_Current_Coins
 
         #This is working
@@ -192,7 +192,7 @@ def mostrar_balance():
     #Get balance for other addresses
     my_addresses = CONFIG['OTHER_ADDRESSES'] if ('OTHER_ADDRESSES' in CONFIG.keys()) else [];
     for oaddr in my_addresses:
-        OADDR_Current_Coins = get_balance(oaddr['address'],CONFIG['COIN'][json_field],CONFIG['COIN']['multiplier'])
+        OADDR_Current_Coins = get_balance(oaddr['address'],CONFIG['COIN']['json_field'],CONFIG['COIN']['multiplier'])
         Total_Balance += OADDR_Current_Coins
 
         #This is working
@@ -229,7 +229,7 @@ def mostrar_rendimiento():
     for mn in my_addresses:
         MN_Init_Date     = mn['setup_date']
         MN_Initial_Coins = mn['setup_balance']
-        MN_Current_Coins = get_balance(mn['address'],CONFIG['COIN'][json_field],CONFIG['COIN']['multiplier'])
+        MN_Current_Coins = get_balance(mn['address'],CONFIG['COIN']['json_field'],CONFIG['COIN']['multiplier'])
         MN_Running_Days  = get_running_days(MN_Init_Date)+1
         MN_Coins_Day     = round((MN_Current_Coins-MN_Initial_Coins)/MN_Running_Days, CONFIG['COIN']['decimals'])
         MN_EUR_Day       = round(MN_Coins_Day*float(coin_stats["data"]['quotes']["EUR"]["price"]), CONFIG['COIN']['decimals'])
@@ -262,7 +262,7 @@ def mostrar_inversores():
     #Get balance for all nodes
     my_addresses = CONFIG['MASTERNODES'] if ('MASTERNODES' in CONFIG.keys()) else [];
     for mn in my_addresses:
-        MN_Current_Coins = get_balance(mn['address'],CONFIG['COIN'][json_field],CONFIG['COIN']['multiplier'])
+        MN_Current_Coins = get_balance(mn['address'],CONFIG['COIN']['json_field'],CONFIG['COIN']['multiplier'])
         MN_Total_Mined   = MN_Current_Coins - float(mn['setup_balance'])
 
         embed.description+= mn['name'] + '\n'
@@ -418,6 +418,6 @@ async def on_ready():
 async def on_message(message):
     if (message.content.upper()[0:5]=="/BOT "):
         embed_message = comando_bot(message.content.upper()[5:])
-        await client.send_message(message.channel, embed=embed_message)
-
+        await message.channel.send(embed=embed_message)
+        #client.send_message(message.channel, embed=embed_message)
 client.run(CONFIG['DISCORD']['api_key'])
