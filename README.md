@@ -62,9 +62,8 @@ In order to chat with your bot just open a chat or a channel where your bot is p
 "/bot ayuda" in order to see the available commands.
 
 ## 7. Donations
-If you want o support this repository I accept donations even 1 TOK is always welcome :-)!
+If you want o support this repository I accept donations even the smallest portion of ETH is always welcome :-)!
 
 - <b>ethereum address:</b> <i>0x44F102616C8e19fF3FED10c0b05B3d23595211ce</i>
-- <b>tokugawa address:</b> <i>TaJHPdZVGutRS9PzbYW9NojjpboeFM1w4A</i>
 
 For any questions feel free to contact me at <i>lyndros at hotmail.com</i>
